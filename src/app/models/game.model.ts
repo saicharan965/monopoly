@@ -1,27 +1,27 @@
 export interface Player {
-  id: number;
+  id: string;
   name: string;
-  color: string;
   money: number;
   position: number;
-  properties: number[];
+  properties: Property[];
 }
 
 export interface Property {
   id: number;
   name: string;
+  type: 'property' | 'chance' | 'community' | 'tax' | 'corner' | 'utility';
   price: number;
   rent: number;
-  owner?: number;
+  owner?: string;
   houses: number;
-  type: 'property' | 'chance' | 'community' | 'tax' | 'corner' | 'utility';
   tier: 1 | 2 | 3;
 }
 
 export interface GameState {
+  id: string;
   players: Player[];
   properties: Property[];
   currentPlayer: number;
-  gameStarted: boolean;
-  winner?: Player;
+  started: boolean;
+  maxPlayers: number;
 }
