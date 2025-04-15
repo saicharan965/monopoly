@@ -97,7 +97,7 @@ io.on("connection", (socket) => {
     const currentPlayer = game.players[game.currentPlayer];
     if (currentPlayer.id !== socket.id) return;
 
-    const roll = Math.floor(Math.random() * 6) + 1;
+    const roll = Math.floor(Math.random() * 12) + 1;
     const newPosition = (currentPlayer.position + roll) % 40;
     currentPlayer.position = newPosition;
 
