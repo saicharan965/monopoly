@@ -1,19 +1,15 @@
 <div class="justify-content-center mt-5">
-  <div class="col-md-10">
+  <div class="col-md-6 col-lg-4 mx-auto h-auto">
     <div class="card px-5">
       <div class="card-body">
-        <h3 class="card-title">Welcome Monopoly {{playerName}}</h3>
-
-        <div class="mb-3">
-          <label for="playerName" class="form-label">Your Name</label>
-          <input type="text" class="form-control" id="playerName" [(ngModel)]="playerName" />
-        </div>
-
-        <div class="mb-3">
+        <p class="card-title h3 p-0 m-0 d-flex justify-content-center">Welcome to Monopoly</p>
+        <span class="badge bg-info rounded-3 m-0 p-1 h3 d-flex justify-content-center">{{playerName}}</span>
+        <p class="card-text d-flex justify-content-center h4">Please choose an option to start a game.</p>
+        <div class="mb-3 d-flex justify-content-center">
           <button class="btn btn-sm btn-primary me-2" (click)="showCreateGame = true; showJoinGame = false">
             Create New Game <i class="bi bi-plus-lg ms-1"></i>
           </button>
-          <button class="btn btn-sm btn-secondary" (click)="showJoinGame = true; showCreateGame = false">
+          <button class="btn btn-sm btn-info" (click)="showJoinGame = true; showCreateGame = false">
             Join Game <i class="bi bi-people ms-1"></i>
           </button>
         </div>

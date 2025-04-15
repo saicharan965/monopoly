@@ -1,12 +1,9 @@
 import { Injectable } from '@angular/core';
 import { io, Socket } from 'socket.io-client';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { GameState } from '../models/game.model';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { GameCreatedResponse, GameState } from '../models/game.model';
 
-export interface GameCreatedResponse {
-  gameState: GameState,
-  gameId: string
-}
+
 
 @Injectable({
   providedIn: 'root'

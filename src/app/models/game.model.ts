@@ -25,3 +25,8 @@ export interface GameState {
   started: boolean;
   maxPlayers: number;
 }
+
+export interface GameCreatedResponse {
+  gameState: GameState,
+  gameId: string
+}
