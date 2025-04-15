@@ -1,0 +1,16 @@
+// Bootstrap 5.3 doesn't support deep nested .dropdown-items
+.dropdown-menu li {
+    .dropdown-item {
+        border-radius: 0;
+    }
+
+    &:first-child .dropdown-item {
+        border-top-left-radius: $dropdown-border-radius;
+        border-top-right-radius: $dropdown-border-radius;
+    }
+
+    &:last-child .dropdown-item {
+        border-bottom-left-radius: $dropdown-border-radius;
+        border-bottom-right-radius: $dropdown-border-radius;
+    }
+}

@@ -1,0 +1,84 @@
+.btn {
+    --#{$prefix}btn-focus-shadow-rgb: unset;
+    --#{$prefix}btn-active-color: var(--#{$prefix}btn-hover-color);
+    --#{$prefix}btn-active-bg: var(--#{$prefix}btn-hover-bg);
+    --#{$prefix}btn-active-border-color: var(--#{$prefix}btn-hover-border-color);
+    --#{$prefix}btn-active-shadow: none;
+
+    &:hover,
+    &:active,
+    &:focus,
+    &:active:focus {
+        outline: none;
+        box-shadow: none;
+    }
+}
+
+@mixin focus-visible($color) {
+    &:focus-visible,
+    &:first-child:active:focus-visible {
+        &:not(:hover) {
+            color: var(--#{$prefix}btn-color);
+            background-color: var(--#{$prefix}btn-bg);
+            border-color: var(--#{$prefix}btn-border-color);
+        }
+
+        box-shadow: 0 0 0 1px $white, 0 0 0 3px $color;
+    }
+}
+
+.btn-primary {
+    --#{$prefix}btn-color: var(--#{$prefix}white);
+    --#{$prefix}btn-bg: var(--#{$prefix}primary);
+    --#{$prefix}btn-border-color: var(--#{$prefix}btn-bg);
+    --#{$prefix}btn-hover-color: var(--#{$prefix}white);
+    --#{$prefix}btn-hover-bg: var(--#{$prefix}blue-70);
+    --#{$prefix}btn-hover-border-color: var(--#{$prefix}btn-hover-bg);
+    --#{$prefix}btn-disabled-color: var(--#{$prefix}white);
+    --#{$prefix}btn-disabled-bg: var(--#{$prefix}grey-40);
+    --#{$prefix}btn-disabled-border-color: var(--#{$prefix}btn-disabled-bg);
+
+    @include focus-visible(purple-50);
+}
+
+.btn-secondary {
+    --#{$prefix}btn-color: var(--#{$prefix}grey-90);
+    --#{$prefix}btn-bg: var(--#{$prefix}white);
+    --#{$prefix}btn-border-color: var(--#{$prefix}grey-30);
+    --#{$prefix}btn-hover-color: var(--#{$prefix}grey-90);
+    --#{$prefix}btn-hover-bg: var(--#{$prefix}btn-bg);
+    --#{$prefix}btn-hover-border-color: var(--#{$prefix}grey-40);
+    --#{$prefix}btn-disabled-color: var(--#{$prefix}grey-40);
+    --#{$prefix}btn-disabled-bg: var(--#{$prefix}btn-bg);
+    --#{$prefix}btn-disabled-border-color: var(--#{$prefix}btn-border-color);
+
+    @include focus-visible(purple-50);
+}
+
+.btn-link {
+    --#{$prefix}btn-color: var(--#{$prefix}grey-90);
+    --#{$prefix}btn-bg: transparent;
+    --#{$prefix}btn-border-color: transparent;
+    --#{$prefix}btn-hover-color: var(--#{$prefix}btn-color);
+    --#{$prefix}btn-hover-bg: var(--#{$prefix}grey-20);
+    --#{$prefix}btn-hover-border-color: var(--#{$prefix}btn-border-color);
+    --#{$prefix}btn-disabled-color: var(--#{$prefix}grey-40);
+    --#{$prefix}btn-disabled-bg: var(--#{$prefix}btn-bg);
+    --#{$prefix}btn-disabled-border-color: var(--#{$prefix}btn-border-color);
+
+    @include focus-visible(purple-50);
+}
+
+.btn-danger {
+    --#{$prefix}btn-color: var(--#{$prefix}white);
+    --#{$prefix}btn-bg: var(--#{$prefix}red-70);
+    --#{$prefix}btn-border-color: var(--#{$prefix}btn-bg);
+    --#{$prefix}btn-hover-color: var(--#{$prefix}white);
+    --#{$prefix}btn-hover-bg: var(--#{$prefix}red-80);
+    --#{$prefix}btn-hover-border-color: var(--#{$prefix}btn-hover-bg);
+    --#{$prefix}btn-disabled-color: var(--#{$prefix}white);
+    --#{$prefix}btn-disabled-bg: var(--#{$prefix}grey-40);
+    --#{$prefix}btn-disabled-border-color: var(--#{$prefix}btn-disabled-bg);
+
+    @include focus-visible(purple-50);
+}

@@ -2,6 +2,8 @@ const express = require("express");
 const { createServer } = require("http");
 const { Server } = require("socket.io");
 const { v4: uuidv4 } = require("uuid");
+const fs = require("fs");
+const path = require("path");
 
 const app = express();
 const httpServer = createServer(app);
@@ -12,11 +14,9 @@ const io = new Server(httpServer, {
   },
 });
 
-// In-memory game state
 const games = new Map();
 const players = new Map();
 
-// Game room management
 io.on("connection", (socket) => {
   console.log("Client connected:", socket.id);
 
@@ -41,7 +41,7 @@ io.on("connection", (socket) => {
 
     games.set(gameId, gameState);
     players.set(socket.id, gameId);
-
+    console.log(gameState.maxPlayers)
     socket.join(gameId);
     socket.emit("gameCreated", { gameId, gameState });
   });
@@ -125,107 +125,9 @@ io.on("connection", (socket) => {
 });
 
 function initializeProperties() {
-  return [
-    {
-      id: 0,
-      name: "Start",
-      type: "corner",
-      price: 0,
-      rent: 0,
-      houses: 0,
-      tier: 1,
-    },
-    {
-      id: 1,
-      name: "Mumbai",
-      type: "property",
-      price: 6000,
-      rent: 600,
-      houses: 0,
-      tier: 1,
-    },
-    {
-      id: 2,
-      name: "Delhi",
-      type: "property",
-      price: 5500,
-      rent: 550,
-      houses: 0,
-      tier: 1,
-    },
-    {
-      id: 3,
-      name: "Chance",
-      type: "chance",
-      price: 0,
-      rent: 0,
-      houses: 0,
-      tier: 1,
-    },
-    {
-      id: 4,
-      name: "Bangalore",
-      type: "property",
-      price: 5000,
-      rent: 500,
-      houses: 0,
-      tier: 1,
-    },
-    {
-      id: 5,
-      name: "Chennai",
-      type: "property",
-      price: 4800,
-      rent: 480,
-      houses: 0,
-      tier: 1,
-    },
-    {
-      id: 6,
-      name: "Community Chest",
-      type: "community",
-      price: 0,
-      rent: 0,
-      houses: 0,
-      tier: 1,
-    },
-    {
-      id: 7,
-      name: "Kolkata",
-      type: "property",
-      price: 4500,
-      rent: 450,
-      houses: 0,
-      tier: 1,
-    },
-    {
-      id: 8,
-      name: "Income Tax",
-      type: "tax",
-      price: 2000,
-      rent: 0,
-      houses: 0,
-      tier: 1,
-    },
-    {
-      id: 9,
-      name: "Hyderabad",
-      type: "property",
-      price: 4000,
-      rent: 400,
-      houses: 0,
-      tier: 1,
-    },
-    {
-      id: 10,
-      name: "Jail",
-      type: "corner",
-      price: 0,
-      rent: 0,
-      houses: 0,
-      tier: 1,
-    },
-  ];
+  const filePath = path.join(__dirname, "./properties.json");
+  const data = fs.readFileSync(filePath, "utf-8");
+  return JSON.parse(data);
 }
 
 const PORT = process.env.PORT || 3000;

@@ -1,0 +1,41 @@
+:root {
+    @each $val, $name in $greys {
+        --#{$prefix}#{$val}: #{$name};
+    }
+
+    @each $val, $name in purples {
+        --#{$prefix}#{$val}: #{$name};
+    }
+
+    @each $val, $name in $oranges {
+        --#{$prefix}#{$val}: #{$name};
+    }
+
+    @each $val, $name in $reds {
+        --#{$prefix}#{$val}: #{$name};
+    }
+}
+
+@each $val, $name in $greys {
+    .#{$val} {
+        color: $name !important;
+    }
+}
+
+@each $val, $name in purples {
+    .#{$val} {
+        color: $name !important;
+    }
+}
+
+@each $val, $name in $oranges {
+    .#{$val} {
+        color: $name !important;
+    }
+}
+
+@each $val, $name in $reds {
+    .#{$val} {
+        color: $name !important;
+    }
+}

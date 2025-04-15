@@ -1,0 +1,38 @@
+.drop-zone.active,
+.drop-placeholder {
+  background: purple-10;
+  border: 1px dashed purple-30;
+
+  td {
+    border-top: 1px dashed purple-30 !important;
+    border-bottom: 1px dashed purple-30 !important;
+  }
+
+  td:first-child {
+    border-left: 1px dashed purple-30 !important;
+  }
+
+  td:last-child {
+    border-right: 1px dashed purple-30 !important;
+  }
+
+  button {
+    visibility: hidden;
+  }
+}
+
+.drop-placeholder {
+  td > * {
+    visibility: hidden;
+  }
+}
+
+.dragging > *,
+.dragging > * > * {
+  background: none !important;
+  box-shadow: none !important;
+}
+
+.dragged-item {
+  display: none;
+}

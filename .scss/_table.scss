@@ -1,0 +1,44 @@
+@use "sass:map";
+@import "shared";
+
+.table.inline {
+  caption-side: top;
+
+  thead {
+    th {
+      text-transform: uppercase;
+      background-color: $grey-10;
+      color: $grey-60;
+      border-bottom: 1px solid $grey-30;
+    }
+  }
+
+  tfoot tr td {
+    border: none;
+  }
+
+  tbody {
+    tr td {
+      border: 1px solid $grey-30;
+      padding: 0;
+      height: 2rem;
+      vertical-align: middle;
+    }
+
+    tr td:first-child {
+      border-left-color: transparent;
+    }
+
+    tr td:last-child {
+      border-right-color: transparent;
+    }
+  }
+
+  caption {
+    text-transform: uppercase;
+    color: $grey-50;
+    font-weight: $font-weight-bold;
+    font-size: map.get($font-sizes, 4);
+    line-height: $line-height-sm;
+  }
+}

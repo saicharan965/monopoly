@@ -1,0 +1,43 @@
+@use "sass:map";
+
+@each $property
+  in (
+    "margin",
+    "margin-x",
+    "margin-y",
+    "margin-top",
+    "margin-end",
+    "margin-bottom",
+    "margin-start",
+    "padding",
+    "padding-x",
+    "padding-y",
+    "padding-top",
+    "padding-end",
+    "padding-bottom",
+    "padding-start",
+    "gap",
+    "row-gap",
+    "column-gap"
+  ) {
+  $utilities: map.merge(
+    $utilities,
+    (
+      #{$property}:
+      map.merge(
+        map.get($utilities, $property),
+        (
+          values:
+          map.merge(
+            map.get(map.get($utilities, $property), "values"),
+            (
+              "1\\/4": $spacer * 0.25,
+              "1\\/2": $spacer * 0.5,
+              "3\\/4": $spacer * 0.75
+            )
+          )
+        )
+      )
+    )
+  );
+}

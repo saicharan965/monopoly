@@ -1,0 +1,45 @@
+@import "./bootstrap/bootstrap";
+@import "./utilities/custom";
+@import "https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800";
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,600,700,800";
+@import "./box-sizing";
+@import "./headers";
+@import "./table";
+@import "./drag-and-drop";
+
+:focus-visible {
+  outline-color: purple-60;
+}
+
+html,
+body {
+  overscroll-behavior-y: none;
+}
+
+.top-bar-item:not(.dropdown-item),
+.top-bar-item:not(.dropdown-item) .btn {
+  background-color: purple-60;
+  color: $white;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  border-radius: 0;
+
+  &:hover {
+    color: $white;
+    background-color: purple-70;
+  }
+
+  &.active,
+  &.show,
+  .show &:not(.dropdown-item) {
+    background-color: purple-70;
+    color: $white;
+  }
+
+  &:focus-visible {
+    color: $white;
+    border-radius: 0;
+    box-shadow: inset 0 -3px 0 0 var(--#{$prefix}blue-30) !important;
+  }
+}

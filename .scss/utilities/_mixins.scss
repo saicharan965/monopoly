@@ -1,0 +1,87 @@
+// Browser Prefixes
+@mixin transform($transforms) {
+    transform: $transforms;
+}
+
+// Rotate
+@mixin rotate($deg) {
+    @include transform(rotate(#{$deg}deg));
+}
+
+// Scale
+@mixin scale($scale) {
+    @include transform(scale($scale));
+}
+
+// Translate
+@mixin translate($x, $y) {
+    @include transform(translate($x, $y));
+}
+
+// Skew
+@mixin skew($x, $y) {
+    @include transform(skew(#{$x}deg, #{$y}deg));
+}
+
+// Transform Origin
+@mixin transform-origin($origin) {
+    transform-origin: $origin;
+}
+
+@mixin transition($args...) {
+    transition: $args;
+}
+
+@mixin box-shadow($top, $left, $blur, $color, $inset: false) {
+    @if $inset {
+        box-shadow: inset $top $left $blur $color;
+    } @else {
+        box-shadow: $top $left $blur $color;
+    }
+}
+
+@mixin box-shadow-args($shadow...) {
+    box-shadow: $shadow;
+}
+
+@mixin background-clip($val: padding-box) {
+    background-clip: $val;
+}
+
+@mixin animation($name, $duration, $fill: forwards) {
+    animation-name: $name;
+    animation-duration: $duration;
+    animation-fill-mode: $fill;
+}
+
+@mixin animation-short($value) {
+    animation: $value;
+}
+
+// Internet Explorer 10+ only
+@mixin ie-only() {
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+        @content;
+    }
+}
+
+@mixin smooth-scroll() {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+@mixin print-skip-header {
+    @media print {
+        @page :header {
+            display: none !important;
+        }
+    }
+}
+
+@mixin print-skip-footer {
+    @media print {
+        @page :footer {
+            display: none !important;
+        }
+    }
+}
