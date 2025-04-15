@@ -1,7 +1,12 @@
 import { Injectable } from '@angular/core';
 import { io, Socket } from 'socket.io-client';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { GameState } from '../models/game.model';
+
+export interface GameCreatedResponse {
+  gameState: GameState,
+  gameId: string
+}
 
 @Injectable({
   providedIn: 'root'
@@ -9,10 +14,12 @@ import { GameState } from '../models/game.model';
 export class SocketService {
   private socket: Socket;
   private gameState = new BehaviorSubject<GameState | null>(null);
+  private gameCreated = new Subject<GameCreatedResponse>();
   private gameError = new BehaviorSubject<string | null>(null);
   private diceRoll = new BehaviorSubject<{ playerId: string; roll: number } | null>(null);
 
   gameState$ = this.gameState.asObservable();
+  gameCreated$ = this.gameCreated.asObservable();
   gameError$ = this.gameError.asObservable();
   diceRoll$ = this.diceRoll.asObservable();
 
@@ -27,6 +34,7 @@ export class SocketService {
     });
 
     this.socket.on('gameCreated', ({ gameId, gameState }: { gameId: string; gameState: GameState }) => {
+      this.gameCreated.next({ gameId, gameState });
       this.gameState.next(gameState);
     });
 

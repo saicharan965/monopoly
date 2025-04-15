@@ -33,7 +33,10 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/styles.scss"],
+            "styles": [
+              "src/styles.scss",
+              "node_modules/bootstrap-icons/font/bootstrap-icons.css"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -48,6 +51,12 @@
                   "type": "anyComponentStyle",
                   "maximumWarning": "2kB",
                   "maximumError": "4kB"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/env/env.local.ts",
+                  "with": "src/env/env.prod.ts"
                 }
               ],
               "outputHashing": "all"

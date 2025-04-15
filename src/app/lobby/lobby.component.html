@@ -1,0 +1,47 @@
+<div class="justify-content-center mt-5">
+  <div class="col-md-10">
+    <div class="card px-5">
+      <div class="card-body">
+        <h3 class="card-title">Welcome to Indian Monopoly</h3>
+
+        <div class="mb-3">
+          <label for="playerName" class="form-label">Your Name</label>
+          <input type="text" class="form-control" id="playerName" [(ngModel)]="playerName" />
+        </div>
+
+        <div class="mb-3">
+          <button class="btn btn-sm btn-primary me-2" (click)="showCreateGame = true; showJoinGame = false">
+            Create New Game <i class="bi bi-plus-lg ms-1"></i>
+          </button>
+          <button class="btn btn-sm btn-secondary" (click)="showJoinGame = true; showCreateGame = false">
+            Join Game <i class="bi bi-people ms-1"></i>
+          </button>
+        </div>
+
+        <div *ngIf="showCreateGame" class="mb-3">
+          <label for="maxPlayers" class="form-label">Number of Players</label>
+          <select class="form-select" id="maxPlayers" [(ngModel)]="maxPlayers">
+            <option value="2">2 Players</option>
+            <option value="3">3 Players</option>
+            <option value="4">4 Players</option>
+          </select>
+          <button class="btn btn-success mt-2" (click)="createGame()">
+            Create Game
+          </button>
+        </div>
+
+        <div *ngIf="showJoinGame" class="mb-3">
+          <label for="gameId" class="form-label">Game ID</label>
+          <input type="text" class="form-control" id="gameId" [(ngModel)]="gameId" />
+          <button class="btn btn-success mt-2" (click)="joinGame()">
+            Join
+          </button>
+        </div>
+
+        <div *ngIf="error" class="alert alert-danger mt-3">
+          {{ error }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
