@@ -3,7 +3,8 @@
   <div class="property-name">{{ property.name }}</div>
   <div *ngIf="property.type === 'property'" class="property-price">₹{{ property.price }}</div>
   <ng-container *ngFor="let player of players">
-    <div *ngIf="player.position === index" class="player-token" [style.backgroundColor]="getPlayerColor(player.id)">
+    <div *ngIf="player.position === index" class="player-token" [style.backgroundColor]="getPlayerColor(player.id)"
+      [title]="player.name">
     </div>
   </ng-container>
 </div>

@@ -57,6 +57,20 @@ export class SocketService {
     this.socket.emit('startGame', gameId);
   }
 
+  reconnectToGameByName(gameId: string, playerName: string) {
+    this.socket.emit('reconnect-by-name', { gameId, playerName });
+
+    this.socket.on('reconnect-success', ({ gameState }) => {
+      this.gameState.next(gameState);
+    });
+
+    this.socket.on('reconnect-error', (err) => {
+      console.error('Reconnect error:', err.message);
+      // Optional: show UI error or redirect
+    });
+  }
+
+
   rollDice(gameId: string) {
     this.socket.emit('rollDice', gameId);
   }

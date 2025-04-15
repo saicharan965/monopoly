@@ -1,5 +1,5 @@
 import { NgIf, NgFor } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { GameState } from '../models/game.model';
 import { SocketService } from '../services/socket.service';
@@ -13,9 +13,10 @@ import { GameBoardComponent } from '../game-board/game-board.component';
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss'
 })
-export class GameComponent {
+export class GameComponent implements OnInit, OnDestroy {
   gameState: GameState | null = null;
   playerName = '';
+  gameId = '';
   lastDiceRoll: { playerId: string; roll: number } | null = null;
   private subscriptions: Subscription[] = [];
   #activatedRoute = inject(ActivatedRoute);
@@ -26,6 +27,11 @@ export class GameComponent {
     this.subscriptions.push(
       this.#activatedRoute.queryParams.subscribe(params => {
         this.playerName = params['playerName'] || '';
+        this.gameId = params['gameId'] || '';
+
+        if (this.gameId && this.playerName) {
+          this.socketService.reconnectToGameByName(this.gameId, this.playerName);
+        }
       }),
       this.socketService.gameState$.subscribe(state => {
         this.gameState = state;

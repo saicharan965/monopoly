@@ -99,264 +99,264 @@
     "tier": 1
   },
   {
-    "id": 0,
-    "name": "Start",
-    "type": "corner",
-    "price": 0,
-    "rent": 0,
-    "houses": 0,
-    "tier": 1
-  },
-  {
-    "id": 1,
-    "name": "Mumbai",
+    "id": 11,
+    "name": "Ahmedabad",
     "type": "property",
-    "price": 6000,
-    "rent": 600,
+    "price": 4200,
+    "rent": 420,
     "houses": 0,
-    "tier": 1
+    "tier": 2
   },
   {
-    "id": 2,
-    "name": "Delhi",
+    "id": 12,
+    "name": "Lucknow",
     "type": "property",
-    "price": 5500,
-    "rent": 550,
+    "price": 4100,
+    "rent": 410,
     "houses": 0,
-    "tier": 1
+    "tier": 2
   },
   {
-    "id": 3,
+    "id": 13,
+    "name": "Surat",
+    "type": "property",
+    "price": 3900,
+    "rent": 390,
+    "houses": 0,
+    "tier": 2
+  },
+  {
+    "id": 14,
+    "name": "Bhopal",
+    "type": "property",
+    "price": 3700,
+    "rent": 370,
+    "houses": 0,
+    "tier": 2
+  },
+  {
+    "id": 15,
+    "name": "Pune",
+    "type": "property",
+    "price": 3600,
+    "rent": 360,
+    "houses": 0,
+    "tier": 2
+  },
+  {
+    "id": 16,
     "name": "Chance",
     "type": "chance",
     "price": 0,
     "rent": 0,
     "houses": 0,
-    "tier": 1
+    "tier": 2
   },
   {
-    "id": 4,
-    "name": "Bangalore",
+    "id": 17,
+    "name": "Jaipur",
     "type": "property",
-    "price": 5000,
-    "rent": 500,
+    "price": 3500,
+    "rent": 350,
     "houses": 0,
-    "tier": 1
+    "tier": 2
   },
   {
-    "id": 5,
-    "name": "Chennai",
+    "id": 18,
+    "name": "Patna",
     "type": "property",
-    "price": 4800,
-    "rent": 480,
+    "price": 3300,
+    "rent": 330,
     "houses": 0,
-    "tier": 1
+    "tier": 2
   },
   {
-    "id": 6,
+    "id": 19,
+    "name": "Indore",
+    "type": "property",
+    "price": 3200,
+    "rent": 320,
+    "houses": 0,
+    "tier": 2
+  },
+  {
+    "id": 20,
+    "name": "Goa",
+    "type": "property",
+    "price": 3100,
+    "rent": 310,
+    "houses": 0,
+    "tier": 2
+  },
+  {
+    "id": 21,
+    "name": "Visakhapatnam",
+    "type": "property",
+    "price": 3000,
+    "rent": 300,
+    "houses": 0,
+    "tier": 2
+  },
+  {
+    "id": 22,
     "name": "Community Chest",
     "type": "community",
     "price": 0,
     "rent": 0,
     "houses": 0,
-    "tier": 1
+    "tier": 2
   },
   {
-    "id": 7,
-    "name": "Kolkata",
+    "id": 23,
+    "name": "Nagpur",
     "type": "property",
-    "price": 4500,
-    "rent": 450,
+    "price": 2800,
+    "rent": 280,
     "houses": 0,
-    "tier": 1
+    "tier": 2
   },
   {
-    "id": 8,
-    "name": "Income Tax",
+    "id": 24,
+    "name": "Kanpur",
+    "type": "property",
+    "price": 2700,
+    "rent": 270,
+    "houses": 0,
+    "tier": 2
+  },
+  {
+    "id": 25,
+    "name": "Luxury Tax",
     "type": "tax",
-    "price": 2000,
+    "price": 2500,
     "rent": 0,
     "houses": 0,
-    "tier": 1
+    "tier": 2
   },
   {
-    "id": 9,
-    "name": "Hyderabad",
+    "id": 26,
+    "name": "Shimla",
     "type": "property",
-    "price": 4000,
-    "rent": 400,
+    "price": 2400,
+    "rent": 240,
     "houses": 0,
-    "tier": 1
+    "tier": 3
   },
   {
-    "id": 10,
-    "name": "Jail",
+    "id": 27,
+    "name": "Varanasi",
+    "type": "property",
+    "price": 2300,
+    "rent": 230,
+    "houses": 0,
+    "tier": 3
+  },
+  {
+    "id": 28,
+    "name": "Ranchi",
+    "type": "property",
+    "price": 2200,
+    "rent": 220,
+    "houses": 0,
+    "tier": 3
+  },
+  {
+    "id": 29,
+    "name": "Corner Stop",
     "type": "corner",
     "price": 0,
     "rent": 0,
     "houses": 0,
-    "tier": 1
+    "tier": 3
   },
   {
-    "id": 0,
-    "name": "Start",
-    "type": "corner",
-    "price": 0,
-    "rent": 0,
-    "houses": 0,
-    "tier": 1
-  },
-  {
-    "id": 1,
-    "name": "Mumbai",
+    "id": 30,
+    "name": "Amritsar",
     "type": "property",
-    "price": 6000,
-    "rent": 600,
+    "price": 2600,
+    "rent": 260,
     "houses": 0,
-    "tier": 1
+    "tier": 3
   },
   {
-    "id": 2,
-    "name": "Delhi",
+    "id": 31,
+    "name": "Darjeeling",
     "type": "property",
-    "price": 5500,
-    "rent": 550,
+    "price": 2500,
+    "rent": 250,
     "houses": 0,
-    "tier": 1
+    "tier": 3
   },
   {
-    "id": 3,
+    "id": 32,
+    "name": "Udaipur",
+    "type": "property",
+    "price": 2400,
+    "rent": 240,
+    "houses": 0,
+    "tier": 3
+  },
+  {
+    "id": 33,
     "name": "Chance",
     "type": "chance",
     "price": 0,
     "rent": 0,
     "houses": 0,
-    "tier": 1
+    "tier": 3
   },
   {
-    "id": 4,
-    "name": "Bangalore",
-    "type": "property",
-    "price": 5000,
-    "rent": 500,
-    "houses": 0,
-    "tier": 1
-  },
-  {
-    "id": 5,
-    "name": "Chennai",
-    "type": "property",
-    "price": 4800,
-    "rent": 480,
-    "houses": 0,
-    "tier": 1
-  },
-  {
-    "id": 6,
+    "id": 34,
     "name": "Community Chest",
     "type": "community",
     "price": 0,
     "rent": 0,
     "houses": 0,
-    "tier": 1
+    "tier": 3
   },
   {
-    "id": 7,
-    "name": "Kolkata",
+    "id": 35,
+    "name": "Kanyakumari",
     "type": "property",
-    "price": 4500,
-    "rent": 450,
+    "price": 2300,
+    "rent": 230,
     "houses": 0,
-    "tier": 1
+    "tier": 3
   },
   {
-    "id": 8,
-    "name": "Income Tax",
-    "type": "tax",
+    "id": 36,
+    "name": "Agra",
+    "type": "property",
+    "price": 2200,
+    "rent": 220,
+    "houses": 0,
+    "tier": 3
+  },
+  {
+    "id": 37,
+    "name": "Manali",
+    "type": "property",
+    "price": 2100,
+    "rent": 210,
+    "houses": 0,
+    "tier": 3
+  },
+  {
+    "id": 38,
+    "name": "Mysore",
+    "type": "property",
     "price": 2000,
-    "rent": 0,
+    "rent": 200,
     "houses": 0,
-    "tier": 1
+    "tier": 3
   },
   {
-    "id": 9,
-    "name": "Hyderabad",
+    "id": 39,
+    "name": "Tirupati",
     "type": "property",
-    "price": 4000,
-    "rent": 400,
+    "price": 1900,
+    "rent": 190,
     "houses": 0,
-    "tier": 1
-  },
-  {
-    "id": 10,
-    "name": "Jail",
-    "type": "corner",
-    "price": 0,
-    "rent": 0,
-    "houses": 0,
-    "tier": 1
-  },
-  {
-    "id": 0,
-    "name": "Start",
-    "type": "corner",
-    "price": 0,
-    "rent": 0,
-    "houses": 0,
-    "tier": 1
-  },
-  {
-    "id": 1,
-    "name": "Mumbai",
-    "type": "property",
-    "price": 6000,
-    "rent": 600,
-    "houses": 0,
-    "tier": 1
-  },
-  {
-    "id": 2,
-    "name": "Delhi",
-    "type": "property",
-    "price": 5500,
-    "rent": 550,
-    "houses": 0,
-    "tier": 1
-  },
-  {
-    "id": 3,
-    "name": "Chance",
-    "type": "chance",
-    "price": 0,
-    "rent": 0,
-    "houses": 0,
-    "tier": 1
-  },
-  {
-    "id": 4,
-    "name": "Bangalore",
-    "type": "property",
-    "price": 5000,
-    "rent": 500,
-    "houses": 0,
-    "tier": 1
-  },
-  {
-    "id": 5,
-    "name": "Chennai",
-    "type": "property",
-    "price": 4800,
-    "rent": 480,
-    "houses": 0,
-    "tier": 1
-  },
-  {
-    "id": 6,
-    "name": "Community Chest",
-    "type": "community",
-    "price": 0,
-    "rent": 0,
-    "houses": 0,
-    "tier": 1
+    "tier": 3
   }
 ]

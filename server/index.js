@@ -41,7 +41,7 @@ io.on("connection", (socket) => {
 
     games.set(gameId, gameState);
     players.set(socket.id, gameId);
-    console.log(gameState.maxPlayers)
+    console.log(gameState.maxPlayers);
     socket.join(gameId);
     socket.emit("gameCreated", { gameId, gameState });
   });
@@ -121,6 +121,36 @@ io.on("connection", (socket) => {
       }
       players.delete(socket.id);
     }
+  });
+
+  socket.on("reconnect-to-game", ({ gameId, playerId }) => {
+    const game = games.get(gameId);
+    console.log(game);
+    console.log(games);
+    if (!game) {
+      socket.emit("reconnect-error", { message: "Game not found" });
+      return;
+    }
+    const player = game.players.find((p) => p.id === playerId);
+    if (!player) {
+      console.log("Player not found in this game", playerId);
+      socket.emit("reconnect-error", {
+        message: "Player not found in this game",
+      });
+      return;
+    }
+
+    player.id = socket.id;
+    players.set(socket.id, gameId);
+    socket.join(gameId);
+
+    socket.emit("reconnect-success", {
+      playerId: socket.id,
+      gameId,
+      gameState: game,
+    });
+
+    socket.to(gameId).emit("player-reconnected", { playerId: socket.id });
   });
 });
 

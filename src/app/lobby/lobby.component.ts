@@ -23,7 +23,7 @@ export class LobbyComponent implements OnInit, OnDestroy {
   #authService = inject(AuthService);
   #socketService = inject(SocketService);
   #router = inject(Router);
-
+  #route = inject(ActivatedRoute);
   ngOnInit() {
     this.subscriptions.push(
       this.#authService.user$.subscribe(user => {
@@ -32,19 +32,30 @@ export class LobbyComponent implements OnInit, OnDestroy {
       this.#socketService.gameCreated$.subscribe(({ gameId }) => {
         this.gameId = gameId;
         this.showCreateGame = false;
-        this.#router.navigate([`${gameId}`], { queryParams: { playerName: this.playerName } });
+        this.#router.navigate([`${gameId}`], {
+          queryParams: { playerName: this.playerName, gameId: this.gameId }
+        });
       }),
       this.#socketService.gameState$.subscribe(state => {
         if (state && this.showJoinGame) {
-          this.#router.navigate([`${state.id}`], { queryParams: { playerName: this.playerName } });
+          this.#router.navigate([`${state.id}`], {
+            queryParams: { playerName: this.playerName, gameId: state.id }
+          });
         }
       }),
       this.#socketService.gameError$.subscribe(error => {
         this.error = error;
       })
     );
-  }
 
+    this.#route.queryParams.subscribe(params => {
+      const name = params['playerName'];
+      const id = params['gameId'];
+      if (name && id) {
+        this.#socketService.reconnectToGameByName(id, name);
+      }
+    });
+  }
   ngOnDestroy() {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
