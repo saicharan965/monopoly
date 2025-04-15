@@ -358,14 +358,5 @@
     "rent": 0,
     "houses": 0,
     "tier": 1
-  },
-  {
-    "id": 7,
-    "name": "Kolkata",
-    "type": "property",
-    "price": 4500,
-    "rent": 450,
-    "houses": 0,
-    "tier": 1
   }
 ]

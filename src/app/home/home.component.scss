@@ -1,0 +1,16 @@
+:host ::ng-deep .row {
+  margin: 0;
+  height: 90vh;
+  overflow: hidden;
+}
+
+:host ::ng-deep .col-md-9 {
+  padding: 0;
+}
+
+:host ::ng-deep .col-md-3 {
+  background-color: #fafafa;
+  overflow-y: auto;
+  height: 100vh;
+  border-left: 2px solid #ddd;
+}
