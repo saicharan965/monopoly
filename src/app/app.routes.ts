@@ -15,7 +15,12 @@ export const routes: Routes = [
       {
         path: ':gameId',
         loadComponent: () => import('./game/game.component').then(m => m.GameComponent)
+      },
+      {
+        path: 'profile',
+        loadComponent: () => import('./profile/profile.component').then(m => m.ProfileComponent),
       }
     ]
   },
+
 ];
