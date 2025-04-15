@@ -38,7 +38,7 @@
     --#{$prefix}btn-disabled-bg: var(--#{$prefix}grey-40);
     --#{$prefix}btn-disabled-border-color: var(--#{$prefix}btn-disabled-bg);
 
-    @include focus-visible(purple-50);
+    @include focus-visible($blue-50);
 }
 
 .btn-secondary {
@@ -52,7 +52,7 @@
     --#{$prefix}btn-disabled-bg: var(--#{$prefix}btn-bg);
     --#{$prefix}btn-disabled-border-color: var(--#{$prefix}btn-border-color);
 
-    @include focus-visible(purple-50);
+    @include focus-visible($blue-50);
 }
 
 .btn-link {
@@ -66,7 +66,7 @@
     --#{$prefix}btn-disabled-bg: var(--#{$prefix}btn-bg);
     --#{$prefix}btn-disabled-border-color: var(--#{$prefix}btn-border-color);
 
-    @include focus-visible(purple-50);
+    @include focus-visible($blue-50);
 }
 
 .btn-danger {
@@ -80,5 +80,5 @@
     --#{$prefix}btn-disabled-bg: var(--#{$prefix}grey-40);
     --#{$prefix}btn-disabled-border-color: var(--#{$prefix}btn-disabled-bg);
 
-    @include focus-visible(purple-50);
+    @include focus-visible($blue-50);
 }

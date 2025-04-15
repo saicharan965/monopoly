@@ -3,7 +3,7 @@
         --#{$prefix}#{$val}: #{$name};
     }
 
-    @each $val, $name in purples {
+    @each $val, $name in $blues {
         --#{$prefix}#{$val}: #{$name};
     }
 
@@ -22,7 +22,7 @@
     }
 }
 
-@each $val, $name in purples {
+@each $val, $name in $blues {
     .#{$val} {
         color: $name !important;
     }

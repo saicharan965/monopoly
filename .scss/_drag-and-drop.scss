@@ -1,19 +1,19 @@
 .drop-zone.active,
 .drop-placeholder {
-  background: purple-10;
-  border: 1px dashed purple-30;
+  background: $blue-10;
+  border: 1px dashed $blue-30;
 
   td {
-    border-top: 1px dashed purple-30 !important;
-    border-bottom: 1px dashed purple-30 !important;
+    border-top: 1px dashed $blue-30 !important;
+    border-bottom: 1px dashed $blue-30 !important;
   }
 
   td:first-child {
-    border-left: 1px dashed purple-30 !important;
+    border-left: 1px dashed $blue-30 !important;
   }
 
   td:last-child {
-    border-right: 1px dashed purple-30 !important;
+    border-right: 1px dashed $blue-30 !important;
   }
 
   button {
