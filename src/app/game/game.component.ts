@@ -24,7 +24,7 @@ export class GameComponent {
   ngOnInit() {
     this.subscriptions.push(
       this.#activatedRoute.queryParams.subscribe(params => {
-        this.gameState!.id = this.#activatedRoute.snapshot.params['gameId']
+        this.playerName = params['playerName'] || '';
       }),
       this.socketService.gameState$.subscribe(state => {
         this.gameState = state;

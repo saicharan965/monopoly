@@ -24,17 +24,20 @@ export class LobbyComponent implements OnInit, OnDestroy {
   #socketService = inject(SocketService);
   #router = inject(Router);
 
-  public ngOnInit() {
+  ngOnInit() {
     this.subscriptions.push(
       this.#authService.user$.subscribe(user => {
-        if (user) {
-          this.playerName = user.name || '';
-        }
+        if (user) this.playerName = user.name || '';
       }),
-      this.#socketService.gameCreated$.subscribe((gameCreatedResponse) => {
-        this.gameId = gameCreatedResponse.gameId;
+      this.#socketService.gameCreated$.subscribe(({ gameId }) => {
+        this.gameId = gameId;
         this.showCreateGame = false;
-        this.#router.navigate([`${this.gameId}`]);
+        this.#router.navigate([`${gameId}`], { queryParams: { playerName: this.playerName } });
+      }),
+      this.#socketService.gameState$.subscribe(state => {
+        if (state && this.showJoinGame) {
+          this.#router.navigate([`${state.id}`], { queryParams: { playerName: this.playerName } });
+        }
       }),
       this.#socketService.gameError$.subscribe(error => {
         this.error = error;
