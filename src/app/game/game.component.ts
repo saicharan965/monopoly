@@ -4,11 +4,12 @@ import { Subscription } from 'rxjs';
 import { GameState } from '../models/game.model';
 import { SocketService } from '../services/socket.service';
 import { ActivatedRoute } from '@angular/router';
+import { GameBoardComponent } from '../game-board/game-board.component';
 
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [NgIf, NgFor],
+  imports: [NgIf, NgFor, GameBoardComponent],
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss'
 })

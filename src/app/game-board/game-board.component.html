@@ -1,1 +1,11 @@
-<p>game-board works!</p>
+<div class="game-board">
+  <app-property-cell *ngFor="let property of gameState.properties; let i = index" [property]="property" [index]="i"
+    [players]="gameState.players" [getPlayerColor]="getPlayerColor" [getGridPosition]="getGridPosition">
+  </app-property-cell>
+
+  <div class="center-area">
+    <app-center-area [gameState]="gameState" [playerName]="playerName" [lastDiceRoll]="lastDiceRoll" [isHost]="isHost"
+      [startGame]="startGame">
+    </app-center-area>
+  </div>
+</div>

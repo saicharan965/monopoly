@@ -1,1 +1,14 @@
-<p>center-area works!</p>
+<div *ngIf="!gameState.started">
+  <h3>Waiting for players...</h3>
+  <p>Game ID: {{ gameState.id }}</p>
+  <p>Players: {{ gameState.players.length }}/{{ gameState.maxPlayers }}</p>
+  <button *ngIf="gameState.players.length >= 2 && isHost()" class="btn btn-primary" (click)="startGame()">
+    Start Game
+  </button>
+</div>
+<div *ngIf="gameState.started">
+  <h3>Indian Monopoly</h3>
+  <div *ngIf="lastDiceRoll" class="dice-result">
+    Last Roll: {{ lastDiceRoll.roll }}
+  </div>
+</div>

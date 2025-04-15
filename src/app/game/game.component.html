@@ -1,34 +1,8 @@
 <div *ngIf="gameState" class="row">
   <div class="col-md-9">
-    <div class="game-board">
-      <div *ngFor="let property of gameState.properties; let i = index" class="property-cell"
-        [style.gridColumn]="getGridPosition(i).col" [style.gridRow]="getGridPosition(i).row"
-        [class.property-owned]="property.owner">
-        <div class="property-name">{{ property.name }}</div>
-        <div *ngIf="property.type === 'property'" class="property-price">₹{{ property.price }}</div>
-        <ng-container *ngFor="let player of gameState.players">
-          <div *ngIf="player.position === i" class="player-token" [style.backgroundColor]="getPlayerColor(player.id)">
-          </div>
-        </ng-container>
-      </div>
-
-      <div class="center-area">
-        <div *ngIf="!gameState.started">
-          <h3>Waiting for players...</h3>
-          <p>Game ID: {{ gameState.id }}</p>
-          <p>Players: {{ gameState.players.length }}/{{ gameState.maxPlayers }}</p>
-          <button *ngIf="gameState.players.length >= 2 && isHost()" class="btn btn-primary" (click)="startGame()">
-            Start Game
-          </button>
-        </div>
-        <div *ngIf="gameState.started">
-          <h3>Indian Monopoly</h3>
-          <div *ngIf="lastDiceRoll" class="dice-result">
-            Last Roll: {{ lastDiceRoll.roll }}
-          </div>
-        </div>
-      </div>
-    </div>
+    <app-game-board [gameState]="gameState" [playerName]="playerName" [lastDiceRoll]="lastDiceRoll"
+      [isHost]="isHost.bind(this)" [startGame]="startGame.bind(this)" [getPlayerColor]="getPlayerColor.bind(this)">
+    </app-game-board>
   </div>
 
   <div class="col-md-3">
