@@ -11,26 +11,34 @@
   </div>
   }
   <div class="community-chest div37 d-flex flex-row">
-    <span class="bg-warning community-chest-title-container">
+    <span class="community-chest-title-container">
       <span class="fw-bold text-dark me-3">
         Chance
       </span>
       <i class="bi bi-question-lg ms-0 text-dark"></i>
     </span>
   </div>
-  <div class="community-chest div38"> <span class="bg-warning community-chest-title-container">
+  <div class="community-chest div38">
+    <span class="community-chest-title-container">
       <span class="fw-bold text-dark me-3">
         Community chest
       </span>
       <i class="bi bi-box2 ms-0 text-dark"></i>
-    </span></div>
+    </span>
+  </div>
   <div class="community-chest div39">
-    <span class="bg-warning community-chest-title-container">
+    <div class="community-chest-title-container">
       <span class="fw-bold text-dark me-3">
         Game Details
       </span>
       <i class="bi bi-card-checklist ms-0 text-dark"></i>
-    </span>
+    </div>
+    <div class="mt-4">
+      <app-dice [isRolling]="isRolling" [diceValues]="diceValues"></app-dice>
+      <div class="d-flex justify-content-center">
+        <button class="btn btn-success" (click)="rollDice()">Roll dice</button>
+      </div>
+    </div>
   </div>
 </div>
 

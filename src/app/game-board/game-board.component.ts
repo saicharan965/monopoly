@@ -5,16 +5,19 @@ import { GameService } from '../services/game.service';
 import { CommonModule } from '@angular/common';
 import { PropertyCellComponent } from '../property-cell/property-cell.component';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
+import { DiceComponent } from '../dice/dice.component';
 
 @Component({
   selector: 'app-game-board',
   standalone: true,
-  imports: [CommonModule, PropertyCellComponent, RouterOutlet],
+  imports: [CommonModule, RouterOutlet, PropertyCellComponent, DiceComponent],
   templateUrl: './game-board.component.html',
   styleUrl: './game-board.component.scss'
 })
 export class GameBoardComponent implements OnInit, OnDestroy {
   protected PropertyColors = PropertyColors;
+  protected isRolling = false;
+  protected diceValues = [1, 1];
   #gameService = inject(GameService);
   #router = inject(Router);
   #route = inject(ActivatedRoute);
@@ -27,6 +30,27 @@ export class GameBoardComponent implements OnInit, OnDestroy {
   onDetails(propertyId: number) {
     this.#router.navigate(['property', propertyId], { relativeTo: this.#route })
   }
+
+  rollDice() {
+    this.isRolling = true;
+
+    let rollInterval = setInterval(() => {
+      this.diceValues = [
+        Math.floor(Math.random() * 6) + 1,
+        Math.floor(Math.random() * 6) + 1
+      ];
+    }, 100);
+
+    setTimeout(() => {
+      clearInterval(rollInterval);
+      this.diceValues = [
+        Math.floor(Math.random() * 6) + 1,
+        Math.floor(Math.random() * 6) + 1
+      ];
+      this.isRolling = false;
+    }, 2000);
+  }
+
 
   public ngOnDestroy() {
     this.#unsubscribe$.next()

@@ -1,0 +1,79 @@
+.dice-container {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  
+  .dice {
+    width: 4rem;
+    height: 4rem;
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.15);
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    padding: 0.5rem;
+    
+    &.rolling {
+      animation: rolling 0.5s linear infinite;
+    }
+    
+    .dot {
+      width: 0.75rem;
+      height: 0.75rem;
+      background-color: #1a1a1a;
+      border-radius: 50%;
+      margin: auto;
+      opacity: 0;
+    }
+    
+    // Set visible dots based on dice value
+    &.dice-1 {
+      .dot-5 { opacity: 1; }
+    }
+    
+    &.dice-2 {
+      .dot-1, .dot-9 { opacity: 1; }
+    }
+    
+    &.dice-3 {
+      .dot-1, .dot-5, .dot-9 { opacity: 1; }
+    }
+    
+    &.dice-4 {
+      .dot-1, .dot-3, .dot-7, .dot-9 { opacity: 1; }
+    }
+    
+    &.dice-5 {
+      .dot-1, .dot-3, .dot-5, .dot-7, .dot-9 { opacity: 1; }
+    }
+    
+    &.dice-6 {
+      .dot-1, .dot-3, .dot-4, .dot-6, .dot-7, .dot-9 { opacity: 1; }
+    }
+  }
+}
+
+@keyframes rolling {
+  0% {
+    transform: rotateX(0deg) rotateY(0deg);
+  }
+  
+  25% {
+    transform: rotateX(90deg) rotateY(45deg);
+  }
+  
+  50% {
+    transform: rotateX(180deg) rotateY(90deg);
+  }
+  
+  75% {
+    transform: rotateX(270deg) rotateY(135deg);
+  }
+  
+  100% {
+    transform: rotateX(360deg) rotateY(180deg);
+  }
+}
