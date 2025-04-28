@@ -1,35 +1,9 @@
-<div class="parent">
-  @for (property of properties; track $index) {
-  <div class="card shadow hover div{{property.id}}"
-    [ngClass]="property.type === 'Property' ? 'proprty-card':'utillity-card'" [ngClass]="{
-    'bg-danger' : property.color === PropertyColors.Red,
-    'bg-success' : property.color === PropertyColors.Green,
-    'bg-info' : property.color === PropertyColors.LightBlue,
-    'bg-warning' : property.color === PropertyColors.Yellow,
-  }">
-    <app-property-cell [property]="property"></app-property-cell>
-  </div>
-  }
-  <div class="community-chest div37 d-flex flex-row">
-    <span class="bg-warning community-chest-title-container">
-      <span class="fw-bold text-dark me-3">
-        Chance
-      </span>
-      <i class="bi bi-question-lg ms-0 text-dark"></i>
+<nav class="navbar bg-info">
+  <div class="container-fluid">
+    <span class="badge cursor-pointer text-dark" routerLink="/">Monopoly</span>
+    <span class="d-flex justify-content-end align-items-center">
+      <i class="bi bi-three-dots-vertical" data-bs-toggle="dropdown"></i>
     </span>
   </div>
-  <div class="community-chest div38"> <span class="bg-warning community-chest-title-container">
-      <span class="fw-bold text-dark me-3">
-        Community chest
-      </span>
-      <i class="bi bi-box2 ms-0 text-dark"></i>
-    </span></div>
-  <div class="community-chest div39">
-    <span class="bg-warning community-chest-title-container">
-      <span class="fw-bold text-dark me-3">
-       Game Details
-      </span>
-      <i class="bi bi-card-checklist ms-0 text-dark"></i>
-    </span>
-  </div>
-</div>
+</nav>
+<router-outlet></router-outlet>
