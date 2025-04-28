@@ -159,4 +159,8 @@ export class GameService {
   public getProperties(): Signal<PropertyCell[]> {
     return signal(this.#properties);
   }
+
+  getPropertyById(id: number): PropertyCell {
+    return this.#properties.find(property => property.id === id) as PropertyCell;
+  }
 }

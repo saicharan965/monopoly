@@ -1,13 +1,13 @@
 <div class="parent">
   @for (property of properties(); track $index) {
-  <div class="card shadow hover div{{property.id}}"
+  <div (click)="onDetails(property.id)" class="card shadow hover div{{property.id}}"
     [ngClass]="property.type === 'Property' ? 'proprty-card':'utillity-card'" [ngClass]="{
     'bg-danger' : property.color === PropertyColors.Red,
     'bg-success' : property.color === PropertyColors.Green,
     'bg-info' : property.color === PropertyColors.LightBlue,
     'bg-warning' : property.color === PropertyColors.Yellow,
   }">
-    <app-property-cell (details)="onDetails($event)" [property]="property"></app-property-cell>
+    <app-property-cell [property]="property"></app-property-cell>
   </div>
   }
   <div class="community-chest div37 d-flex flex-row">
@@ -33,3 +33,7 @@
     </span>
   </div>
 </div>
+
+<ng-container>
+  <router-outlet></router-outlet>
+</ng-container>

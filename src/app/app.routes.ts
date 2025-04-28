@@ -12,6 +12,12 @@ export const routes: Routes = [
       {
         path: 'game/:id',
         loadComponent: () => import('./game-board/game-board.component').then(m => m.GameBoardComponent),
+        children: [
+          {
+            path: 'property/:id',
+            loadComponent: () => import('./property-cell-details/property-cell-details.component').then(m => m.PropertyCellDetailsComponent),
+          }
+        ]
       }
     ]
   }

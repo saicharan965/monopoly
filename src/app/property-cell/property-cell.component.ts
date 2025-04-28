@@ -11,6 +11,4 @@ import { NgClass } from '@angular/common';
 })
 export class PropertyCellComponent {
   public property = input.required<PropertyCell>()
-  public details = output<number>()
-
 }
