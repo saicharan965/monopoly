@@ -1,5 +1,6 @@
 export interface PropertyCell {
   id: number;
+  type: "Property" | "Utility";
   name: string;
   price: number | null;
   rent: number | null;
@@ -14,12 +15,12 @@ export enum PropertyTier {
   Basic = 'Basic',
   Premium = 'Premium',
   Luxury = 'Luxury',
-  Utility = 'Utility'
+  Utility = "Utility",
 }
 
 export enum PropertyColors {
   LightBlue = 'LightBlue',
-  Orange = 'Orange',
+  Green = 'Green',
   Red = 'Red',
   Yellow = 'Yellow'
 }

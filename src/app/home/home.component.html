@@ -1,18 +1,24 @@
 <div class="parent">
   @for (property of properties; track $index) {
-  <div class="card shadow hover div{{property.id}}">
+  <div class="card shadow hover div{{property.id}}"
+    [ngClass]="property.type === 'Property' ? 'proprty-card':'utillity-card'" [ngClass]="{
+    'bg-danger' : property.color === PropertyColors.Red,
+    'bg-success' : property.color === PropertyColors.Green,
+    'bg-info' : property.color === PropertyColors.LightBlue,
+    'bg-warning' : property.color === PropertyColors.Yellow,
+  }">
     <div class="d-flex flex-column justify-content-center align-items-center">
-        <div class="property-cell-name">
-          {{property.name}}
-        </div>
-        <div class="property-cell-price">
-          {{property.price}}
-        </div>
-        <div class="property-cell-rent">
-          {{property.rent}}
-        </div>
+      <div class="property-cell-name">
+        {{property.name}}
+      </div>
+      <div class="property-cell-price">
+        {{property.price}}
+      </div>
+      <div class="property-cell-rent">
+        {{property.rent}}
       </div>
     </div>
+  </div>
   }
   <div class="community-chest div37 d-flex flex-row">
     <span class="bg-warning community-chest-title-container">
