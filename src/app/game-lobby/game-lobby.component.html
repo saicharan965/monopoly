@@ -1,0 +1,38 @@
+<div class="container mt-5">
+  <form [formGroup]="lobbyFormGroup" (ngSubmit)="createLobby()">
+    <div class="mb-3">
+      <select class="form-select" aria-label="maxPlayers" formControlName="maxPlayers">
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+        <option value="4">Four</option>
+      </select>
+    </div>
+
+    <div class="card mb-3">
+      <div class="card-header">Players</div>
+      <div class="card-body d-flex gap-2" formArrayName="players">
+        @for (player of players.controls; track $index; let i = $index) {
+        <div [formGroupName]="i" class="mb-3 border p-3 rounded">
+          <div class="mb-2">
+            <input type="text" class="form-control" placeholder="Player Name" formControlName="name">
+          </div>
+          <div class="mb-2">
+            <select class="form-select" formControlName="tokenColor">
+              @for (color of getAvailableColors(i); track $index;) {
+              <option [value]="color">{{ color }}</option>
+              }
+            </select>
+          </div>
+          <button type="button" class="btn btn-danger" (click)="removePlayer(i)">Remove Player</button>
+        </div> }
+      </div>
+    </div>
+    @if (lobbyFormGroup.controls['maxPlayers'].value) {
+    <div class="d-flex my-2">
+      <button type="button" [disabled]="players.length >= lobbyFormGroup.controls['maxPlayers'].value"
+        class="btn btn-primary" (click)="addPlayer()">Add Player <i class="bi bi-plus ms-2"></i></button>
+    </div>
+    <button [disabled]="!lobbyFormGroup.valid" type="submit" class="btn btn-success">Create Lobby</button>
+    }
+  </form>
+</div>

@@ -27,6 +27,7 @@ export enum PropertyColors {
 
 export interface Player {
   id: number;
+  name: string;
   tokenColor: AvailableTokenColors;
 }
 
