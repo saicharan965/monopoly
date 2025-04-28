@@ -1,12 +1,13 @@
 import { Injectable } from "@angular/core";
-import { PropertyCell, PropertyColors, PropertyTier } from "../models/game-board.models";
-import { Observable, of } from "rxjs";
+import { GameState, PropertyCell, PropertyColors, PropertyTier } from "../models/game-board.models";
+import { Observable, of, Subject } from "rxjs";
 
 @Injectable({
   providedIn: "root",
 })
 
 export class GameService {
+  gameState: Subject<GameState> = new Subject<GameState>();
   #properties: PropertyCell[] = [
     {
       id: 1, name: "Start", price: null, rent: null, tier: PropertyTier.Utility, color: PropertyColors.LightBlue,

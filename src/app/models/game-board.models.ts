@@ -24,3 +24,29 @@ export enum PropertyColors {
   Red = 'Red',
   Yellow = 'Yellow'
 }
+
+export interface Player {
+  id: number;
+  tokenColor: AvailableTokenColors;
+}
+
+export enum AvailableTokenColors {
+  Red = 'Red',
+  Green = 'Green',
+  Yellow = 'Yellow',
+  Blue = 'Blue',
+}
+
+export interface GameState {
+  id: number;
+  state: State;
+  players: Player[];
+}
+
+export enum State {
+  Started = 'Started',
+  Completed = 'Completed',
+  Paused = 'Paused',
+  Waiting = 'Waiting',
+  RollingDice = 'RollingDice'
+}

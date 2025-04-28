@@ -1,0 +1,9 @@
+<div class="d-flex flex-column justify-content-center align-items-center">
+  <div class="property-cell-name">{{property().name}}
+  </div>
+  @if (property().price) {
+  <div class="property-cell-price">
+    ₹{{property().price}}
+  </div>
+  }
+</div>

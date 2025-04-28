@@ -7,29 +7,29 @@
     'bg-info' : property.color === PropertyColors.LightBlue,
     'bg-warning' : property.color === PropertyColors.Yellow,
   }">
-    <div class="d-flex flex-column justify-content-center align-items-center">
-      <div class="property-cell-name">
-        {{property.name}}
-      </div>
-      <div class="property-cell-price">
-        {{property.price}}
-      </div>
-      <div class="property-cell-rent">
-        {{property.rent}}
-      </div>
-    </div>
+    <app-property-cell [property]="property"></app-property-cell>
   </div>
   }
   <div class="community-chest div37 d-flex flex-row">
     <span class="bg-warning community-chest-title-container">
       <span class="fw-bold text-dark me-3">
         Chance
-      </span> <img class="icon-md" src="icons/question-solid.svg" alt="question-mark">
+      </span>
+      <i class="bi bi-question-lg ms-0 text-dark"></i>
     </span>
   </div>
   <div class="community-chest div38"> <span class="bg-warning community-chest-title-container">
       <span class="fw-bold text-dark me-3">
         Community chest
-      </span> <img class="icon-md" src="icons/toolbox-solid.svg" alt="question-mark">
+      </span>
+      <i class="bi bi-box2 ms-0 text-dark"></i>
     </span></div>
+  <div class="community-chest div39">
+    <span class="bg-warning community-chest-title-container">
+      <span class="fw-bold text-dark me-3">
+       Game Details
+      </span>
+      <i class="bi bi-card-checklist ms-0 text-dark"></i>
+    </span>
+  </div>
 </div>

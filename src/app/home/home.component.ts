@@ -3,11 +3,12 @@ import { PropertyCell, PropertyColors } from '../models/game-board.models';
 import { GameService } from '../services/game.service';
 import { CommonModule } from '@angular/common';
 import { Subject, takeUntil } from 'rxjs';
+import { PropertyCellComponent } from '../property-cell/property-cell.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, PropertyCellComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
