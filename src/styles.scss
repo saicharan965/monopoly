@@ -1,1 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap");
+
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+.icon-sm {
+  height: 16px;
+  width: 16px;
+}
+
+.icon-md {
+  height: 24px;
+  width: 24px;
+}
+
+.icon-lg {
+  height: 32px;
+  width: 32px;
+}
