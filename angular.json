@@ -33,6 +33,11 @@
                 "glob": "**/*",
                 "input": "src/assets/icons",
                 "output": "icons"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/assets/properties",
+                "output": "properties"
               }
             ],
             "styles": [

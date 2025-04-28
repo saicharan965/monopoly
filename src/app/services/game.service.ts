@@ -1,6 +1,6 @@
-import { Injectable } from "@angular/core";
+import { Injectable, signal, Signal } from "@angular/core";
 import { GameState, PropertyCell, PropertyColors, PropertyTier } from "../models/game-board.models";
-import { Observable, of, Subject } from "rxjs";
+import { Subject } from "rxjs";
 
 @Injectable({
   providedIn: "root",
@@ -102,9 +102,10 @@ export class GameService {
       type: "Property"
     },
     {
-      id: 24, name: "Coimbatore", price: 130, rent: 13, tier: PropertyTier.Basic, color: PropertyColors.Green,
+      id: 24, name: "Thiruvananthapuram", price: 100, rent: 10, tier: PropertyTier.Basic, color: PropertyColors.LightBlue,
       type: "Property"
     },
+
     {
       id: 25, name: "Mysuru", price: 120, rent: 12, tier: PropertyTier.Basic, color: PropertyColors.LightBlue,
       type: "Property"
@@ -114,7 +115,7 @@ export class GameService {
       type: "Property"
     },
     {
-      id: 27, name: "Thiruvananthapuram", price: 100, rent: 10, tier: PropertyTier.Basic, color: PropertyColors.LightBlue,
+      id: 27, name: "Coimbatore", price: 130, rent: 13, tier: PropertyTier.Basic, color: PropertyColors.Green,
       type: "Property"
     },
     {
@@ -155,7 +156,7 @@ export class GameService {
     },
   ];
 
-  public getProperties(): Observable<PropertyCell[]> {
-    return of(this.#properties);
+  public getProperties(): Signal<PropertyCell[]> {
+    return signal(this.#properties);
   }
 }

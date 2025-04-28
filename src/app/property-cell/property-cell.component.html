@@ -1,9 +1,10 @@
-<div class="d-flex flex-column justify-content-center align-items-center">
-  <div class="property-cell-name">{{property().name}}
+<div class="d-flex flex-column justify-content-center align-items-center" (click)="details.emit(property().id)">
+  <div class="card-title text-center fw-bolder"
+    [ngClass]="{'d-flex justify-self-center align-self-center': property().tier === 'Utility'}">{{property().name}}
   </div>
   @if (property().price) {
-  <div class="property-cell-price">
-    ₹{{property().price}}
+  <div class="property-cell-price badge bg-light text-dark border border-1 border-dark rounded-pill">
+    ₹ {{property().price}}
   </div>
   }
 </div>
