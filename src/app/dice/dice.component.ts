@@ -21,8 +21,6 @@ export class DiceComponent implements OnChanges {
     }
   }
 
-
-
   updateDiceClasses(): void {
     if (this.diceValues != null) {
       // First dice
@@ -30,7 +28,6 @@ export class DiceComponent implements OnChanges {
       if (this.isRolling) {
         this.dice1Classes.push('rolling');
       }
-
       // Second dice
       this.dice2Classes = ['dice', `dice-${this.diceValues[1] || 1}`];
       if (this.isRolling) {

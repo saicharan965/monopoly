@@ -1,5 +1,5 @@
 import { Component, input, output } from '@angular/core';
-import { PropertyCell } from '../models/game-board.models';
+import { GameState, PropertyCell } from '../models/game-board.models';
 import { NgClass } from '@angular/common';
 
 @Component({
@@ -11,4 +11,5 @@ import { NgClass } from '@angular/common';
 })
 export class PropertyCellComponent {
   public property = input.required<PropertyCell>()
+  public gameState = input.required<GameState | undefined>()
 }

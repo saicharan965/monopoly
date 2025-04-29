@@ -34,7 +34,7 @@ export enum PropertyColors {
 }
 
 export interface Player {
-  id: number;
+  id: string | null;
   name: string;
   tokenColor: AvailableTokenColors;
 }
@@ -47,12 +47,13 @@ export enum AvailableTokenColors {
 }
 
 export interface GameState {
-  id: number;
-  state: State;
+  id: string;
+  status: Status;
   players: Player[];
+  lastPlayedOn: Date
 }
 
-export enum State {
+export enum Status {
   Started = 'Started',
   Completed = 'Completed',
   Paused = 'Paused',

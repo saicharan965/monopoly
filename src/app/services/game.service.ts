@@ -7,7 +7,8 @@ import { Subject } from "rxjs";
 })
 
 export class GameService {
-  gameState: Subject<GameState> = new Subject<GameState>();
+  public gameState = signal<GameState | undefined>(undefined)
+
   #properties: PropertyCell[] = [
     {
       id: 1, name: "Start",

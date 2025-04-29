@@ -2,10 +2,12 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { v4 as uuidv4 } from 'uuid'
-import { AvailableTokenColors } from '../models/game-board.models';
+import { AvailableTokenColors, GameState, Player, Status } from '../models/game-board.models';
 import { ToastrService } from 'ngx-toastr';
 import { CreateGameFormGroup, PlayerFormGroup } from '../models/game-form-group';
 import { ActivatedRoute, Router } from '@angular/router';
+import { GameService } from '../services/game.service';
+import { last } from 'rxjs';
 
 
 @Component({
@@ -18,6 +20,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class GameLobbyComponent implements OnInit {
   AvailableTokenColors = AvailableTokenColors;
   availableTokenColors = Object.values(AvailableTokenColors);
+  hasPreviousGames = false;
+  previousGames: GameState[] = []
+  #gameService = inject(GameService);
   #toastrService = inject(ToastrService);
   #router = inject(Router);
   #route = inject(ActivatedRoute);
@@ -30,6 +35,24 @@ export class GameLobbyComponent implements OnInit {
 
   ngOnInit(): void {
     this.addPlayer()
+    this.getPreviousGames()
+  }
+
+  getPreviousGames() {
+    const gamesKeys = Object.keys(localStorage)
+    const previousGamesKeys = gamesKeys ? gamesKeys.filter(x => x.includes('game-')) : []
+    previousGamesKeys.forEach((gameKey) => {
+      const gameState = localStorage.getItem(gameKey)
+      if (gameState != null) {
+        const parsedGameState = JSON.parse(gameState) as GameState;
+        this.previousGames.push(parsedGameState);
+      }
+    })
+    const previousGames: GameState[] = []
+    if (previousGames.length > 0) {
+      this.hasPreviousGames = true;
+      this.previousGames = previousGames;
+    }
   }
 
   get players() {
@@ -59,11 +82,26 @@ export class GameLobbyComponent implements OnInit {
   protected createLobby() {
     if (this.lobbyFormGroup.valid) {
       const gameId = this.lobbyFormGroup.controls['id'].value;
-      sessionStorage.setItem(`gameLobby-${gameId}`, JSON.stringify(this.lobbyFormGroup.value));
+      const gameState: GameState = {
+        id: gameId ? gameId : uuidv4(),
+        status: Status.Waiting,
+        lastPlayedOn: new Date(),
+        players: this.lobbyFormGroup.value.players?.map(player => ({
+          id: player.id,
+          name: player.name,
+          tokenColor: player.tokenColor
+        })) as Player[]
+      }
+      localStorage.setItem(`game-${gameId}`, JSON.stringify(gameState));
+      this.#gameService.gameState.set(gameState);
       this.#router.navigate(['game', gameId], { relativeTo: this.#route });
     } else {
       this.#toastrService.error('Please fill all the required fields.');
     }
+  }
+
+  protected joinGame(gameId: string) {
+    this.#router.navigate(['game', gameId], { relativeTo: this.#route });
   }
 
   #getSelectedColors(excludeIndex?: number): string[] {
