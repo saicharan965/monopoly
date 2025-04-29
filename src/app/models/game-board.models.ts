@@ -9,6 +9,14 @@ export interface PropertyCell {
   mortgageValue?: number;
   tier: PropertyTier,
   color: PropertyColors;
+  details: PropertyDetails
+}
+
+export interface PropertyDetails {
+  description: string;
+  imageUrl: string;
+  houseCost: number;
+  hotelCost: number;
 }
 
 export enum PropertyTier {

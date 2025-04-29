@@ -5,6 +5,15 @@
   font-family: "Poppins", sans-serif;
 }
 
+i:hover {
+  -webkit-text-stroke: 1px;
+  cursor: pointer;
+}
+button:hover {
+  -webkit-text-stroke: 0.5px;
+  cursor: pointer;
+}
+
 .icon-sm {
   height: 16px;
   width: 16px;
