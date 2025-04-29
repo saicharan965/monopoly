@@ -37,6 +37,14 @@ export interface Player {
   id: string | null;
   name: string;
   tokenColor: AvailableTokenColors;
+  money: number;
+  position: number;
+  properties: PlayerProperty[];
+}
+export interface PlayerProperty {
+  houseCount: number;
+  hotelCount: number;
+  rentCollected: number;
 }
 
 export enum AvailableTokenColors {

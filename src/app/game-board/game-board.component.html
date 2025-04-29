@@ -1,12 +1,3 @@
-@if (showStartGameScreen) {
-<button class="btn btn-outline-success">
-  <span class="fw-bold text-dark me-3">
-    Start Game
-  </span>
-  <i class="bi bi-play-circle ms-0 text-dark"></i>
-</button>
-}
-@else {
 <div class="parent">
   @for (property of properties(); track $index) {
   <div (click)="onDetails(property.id)" class="card shadow hover div{{property.id}}"
@@ -20,7 +11,7 @@
   </div>
   }
   <div class="community-chest div37 d-flex flex-row">
-    <span class="community-chest-title-container">
+    <span class="community-chest-title-container bg-primary-subtle">
       <span class="fw-bold text-dark me-3">
         Chance
       </span>
@@ -28,7 +19,7 @@
     </span>
   </div>
   <div class="community-chest div38">
-    <span class="community-chest-title-container">
+    <span class="community-chest-title-container bg-primary-subtle">
       <span class="fw-bold text-dark me-3">
         Community chest
       </span>
@@ -36,7 +27,7 @@
     </span>
   </div>
   <div class="community-chest div39">
-    <div class="community-chest-title-container">
+    <div class="community-chest-title-container bg-primary-subtle">
       <span class="fw-bold text-dark me-3">
         Game Details
       </span>
@@ -48,11 +39,20 @@
         <button class="btn btn-success" (click)="rollDice()">Roll dice</button>
       </div>
     </div>
-    <div class="container-fluid">
+    <div class="container-fluid gap-2 d-flex justify-content-evenly mt-2">
       @for (player of gameState()?.players; track $index) {
-      <div class="card d-flex flex-row justify-content-between align-items-center mt-2">
-        <p class="card-body"> <span class="fw-bold">Name : </span> {{player.name}}</p>
-        <p class="card-body"> <span class="fw-bold">Color : </span> {{player.tokenColor}}</p>
+      <div class="card w-50">
+        <p class="card-title text-center bg-primary-subtle mb-0">{{player.name}}</p>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <span class="fw-bold">Color : </span>
+            {{player.tokenColor}}
+          </li>
+          <li class="list-group-item">
+            <span class="fw-bold">Money : </span>
+            {{player.money}}
+          </li>
+        </ul>
       </div>
       }
     </div>
@@ -64,7 +64,6 @@
     <i class="bi bi-person-circle ms-0 text-dark"></i>
   </div>
 </div>
-}
 
 <ng-container>
   <router-outlet></router-outlet>

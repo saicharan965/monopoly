@@ -28,19 +28,12 @@ export class GameBoardComponent implements OnInit, OnDestroy {
   public ngOnInit() {
     const gameIdFromRoute = this.#route.snapshot.params['id'];
     const previousGame = localStorage.getItem(`game-${gameIdFromRoute}`)
-    this.properties.set(this.#gameService.getProperties()()); //setting properties
+    this.properties.set(this.#gameService.getProperties()());
     if (previousGame != null) {
       //restore the previous game and maybe ask a confirmation that you want to continue ?
       this.gameState.set(JSON.parse(previousGame));
       this.#gameService.gameState.update(() => JSON.parse(previousGame));
     }
-    else {
-      this.gameState.set(this.#gameService.gameState());
-      if (this.gameState()?.status === Status.Waiting) {
-        this.showStartGameScreen = true;
-      }
-    }
-
   }
 
   protected onDetails(propertyId: number) {
