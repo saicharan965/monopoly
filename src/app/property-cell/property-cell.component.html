@@ -1,14 +1,21 @@
-<div class="d-flex flex-row align-items-center bg-transparent">
-  <div class="d-flex flex-column col-1 flex-wrap justify-content-center align-items-center">
-    <i class="bi bi-geo-alt-fill icon-sm"></i>
+<div class="d-flex flex-row align-items-center bg-transparent position-relative">
+  @if (playersOnThisCell.length > 0) {
+  <div class="d-flex m-1">
+    @for (player of playersOnThisCell; track player.id) {
+    <div class="player-marker rounded-circle" [ngStyle]="{'background-color': player.tokenColor.toLowerCase()}"
+      title="{{player.name}}" style="width: 12px; height: 12px; border: 1px solid #000;"></div>
+    }
   </div>
+  }
+
   <div class="col-11 d-flex flex-column justify-content-center align-items-center">
     <div class="card-title text-center fw-bolder"
-      [ngClass]="{'d-flex justify-self-center align-self-center': property().tier === 'Utility'}">{{property().name}}
+      [ngClass]="{'d-flex justify-self-center align-self-center': property().tier === 'Utility'}">
+      {{ property().name }}
     </div>
     @if (property().price) {
     <div class="property-cell-price badge bg-light text-dark border border-1 border-dark rounded-pill">
-      ₹ {{property().price}}
+      ₹ {{ property().price }}
     </div>
     }
   </div>

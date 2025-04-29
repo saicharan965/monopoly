@@ -68,5 +68,6 @@ export enum Status {
   Completed = 'Completed',
   Paused = 'Paused',
   Waiting = 'Waiting',
-  RollingDice = 'RollingDice'
+  RollingDice = 'RollingDice',
+  RolledDice = 'RolledDice'
 }

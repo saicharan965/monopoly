@@ -16,7 +16,6 @@ import { DiceComponent } from '../dice/dice.component';
 })
 export class GameBoardComponent implements OnInit, OnDestroy {
   protected PropertyColors = PropertyColors;
-  protected showStartGameScreen?: boolean
   protected gameState = signal<GameState | undefined>(undefined);
   protected isRolling = false;
   protected diceValues = [1, 1];
@@ -40,9 +39,15 @@ export class GameBoardComponent implements OnInit, OnDestroy {
     this.#router.navigate(['property', propertyId], { relativeTo: this.#route })
   }
 
+
   protected rollDice() {
     this.isRolling = true;
-
+    this.gameState.update((prevState) => {
+      if (!prevState || !prevState.id) {
+        throw new Error('GameState or GameState.id is undefined');
+      }
+      return { ...prevState, status: Status.RollingDice, lastPlayedOn: new Date(), id: prevState.id };
+    });
     let rollInterval = setInterval(() => {
       this.diceValues = [
         Math.floor(Math.random() * 6) + 1,
@@ -57,6 +62,18 @@ export class GameBoardComponent implements OnInit, OnDestroy {
         Math.floor(Math.random() * 6) + 1
       ];
       this.isRolling = false;
+      this.gameState.update((prevState) => {
+        if (!prevState || !prevState.id) {
+          throw new Error('GameState or GameState.id is undefined');
+        }
+        prevState.players.forEach((player) => {
+          if (player.id === prevState.currentPlayer.id) {
+            player.position = (player.position + this.diceValues[0] + this.diceValues[1]) % this.properties().length;
+          }
+        })
+        return { ...prevState, status: Status.RolledDice, lastPlayedOn: new Date(), id: prevState.id };
+      });
+      localStorage.setItem(`game-${this.gameState()?.id}`, JSON.stringify(this.gameState()));
     }, 2000);
   }
 
