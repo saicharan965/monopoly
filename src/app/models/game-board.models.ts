@@ -39,9 +39,10 @@ export interface Player {
   tokenColor: AvailableTokenColors;
   money: number;
   position: number;
-  properties: PlayerProperty[];
+  properties: PlayerProperty[] | null;
 }
 export interface PlayerProperty {
+  property: PropertyCell;
   houseCount: number;
   hotelCount: number;
   rentCollected: number;

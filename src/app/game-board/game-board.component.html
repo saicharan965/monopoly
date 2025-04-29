@@ -2,10 +2,10 @@
   @for (property of properties(); track $index) {
   <div (click)="onDetails(property.id)" class="card shadow hover div{{property.id}}"
     [ngClass]="property.type === 'Property' ? 'proprty-card':'utillity-card'" [ngClass]="{
-      'bg-danger' : property.color === PropertyColors.Red,
-      'bg-success' : property.color === PropertyColors.Green,
-      'bg-info' : property.color === PropertyColors.LightBlue,
-      'bg-warning' : property.color === PropertyColors.Yellow,
+      'bg-danger-subtle' : property.color === PropertyColors.Red,
+      'bg-success-subtle' : property.color === PropertyColors.Green,
+      'bg-info-subtle' : property.color === PropertyColors.LightBlue,
+      'bg-warning-subtle' : property.color === PropertyColors.Yellow,
     }">
     <app-property-cell [gameState]="gameState()" [property]="property"></app-property-cell>
   </div>
@@ -48,9 +48,16 @@
             <span class="fw-bold">Color : </span>
             {{player.tokenColor}}
           </li>
+          <li class="list-group-item d-flex justify-content-start gap-2 align-items-center">
+            <span class="fw-bold">Money :
+              ₹ </span>
+            <span class="badge bg-success-subtle text-dark">
+              {{player.money}}
+            </span>
+          </li>
           <li class="list-group-item">
-            <span class="fw-bold">Money : </span>
-            {{player.money}}
+            <span class="fw-bold">Position : </span>
+            {{player.position}}
           </li>
         </ul>
       </div>

@@ -7,7 +7,6 @@ import { ToastrService } from 'ngx-toastr';
 import { CreateGameFormGroup, PlayerFormGroup } from '../models/game-form-group';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GameService } from '../services/game.service';
-import { last } from 'rxjs';
 
 
 @Component({
@@ -90,7 +89,10 @@ export class GameLobbyComponent implements OnInit {
         players: this.lobbyFormGroup.value.players?.map(player => ({
           id: player.id,
           name: player.name,
-          tokenColor: player.tokenColor
+          tokenColor: player.tokenColor,
+          position: 0,
+          properties: null,
+          money: 1500,
         })) as Player[]
       }
       localStorage.setItem(`game-${gameId}`, JSON.stringify(gameState));
