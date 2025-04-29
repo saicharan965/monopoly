@@ -35,8 +35,13 @@
     </div>
     <div class="mt-4">
       <app-dice [isRolling]="isRolling" [diceValues]="diceValues"></app-dice>
-      <div class="d-flex justify-content-center">
-        <button class="btn btn-success" (click)="rollDice()">Roll dice</button>
+      <div class="d-flex justify-content-center gap-2">
+        <button class="btn btn-success" [disabled]="gameState()?.isCurrentPlayerAlreadyRolledTheDice"
+          (click)="rollDice()">Roll dice</button>
+        <button class="btn btn-danger" [disabled]="!gameState()?.isCurrentPlayerAlreadyRolledTheDice" (click)="endTurn()">End Turn</button>
+        @if (showTimer()) {
+        <button class="btn btn-danger"> {{timer()}}</button>
+        }
       </div>
     </div>
     <div class="container-fluid gap-2 d-flex justify-content-evenly mt-2">

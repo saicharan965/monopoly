@@ -86,6 +86,7 @@ export class GameLobbyComponent implements OnInit {
         currentPlayer: this.lobbyFormGroup.value.players[0] as Player,
         status: Status.Waiting,
         lastPlayedOn: new Date(),
+        isCurrentPlayerAlreadyRolledTheDice: false,
         players: this.lobbyFormGroup.value.players?.map(player => ({
           id: player.id,
           name: player.name,

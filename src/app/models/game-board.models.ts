@@ -60,6 +60,7 @@ export interface GameState {
   status: Status;
   players: Player[];
   currentPlayer: Player;
+  isCurrentPlayerAlreadyRolledTheDice: boolean;
   lastPlayedOn: Date
 }
 
@@ -69,5 +70,6 @@ export enum Status {
   Paused = 'Paused',
   Waiting = 'Waiting',
   RollingDice = 'RollingDice',
-  RolledDice = 'RolledDice'
+  RolledDice = 'RolledDice',
+  EndTurn = 'EndTurn'
 }
