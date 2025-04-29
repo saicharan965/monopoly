@@ -80,10 +80,11 @@ export class GameLobbyComponent implements OnInit {
   }
 
   protected createLobby() {
-    if (this.lobbyFormGroup.valid) {
+    if (this.lobbyFormGroup.valid && this.lobbyFormGroup.value.players) {
       const gameId = this.lobbyFormGroup.controls['id'].value;
       const gameState: GameState = {
         id: gameId ? gameId : uuidv4(),
+        currentPlayer: this.lobbyFormGroup.value.players[0] as Player,
         status: Status.Waiting,
         lastPlayedOn: new Date(),
         players: this.lobbyFormGroup.value.players?.map(player => ({
@@ -102,6 +103,12 @@ export class GameLobbyComponent implements OnInit {
 
   protected joinGame(gameId: string) {
     this.#router.navigate(['game', gameId], { relativeTo: this.#route });
+  }
+
+  protected deleteGame(gameId: string) {
+    localStorage.removeItem(`game-${gameId}`);
+    this.previousGames = this.previousGames.filter(game => game.id !== gameId);
+    this.#toastrService.success('Game deleted successfully');
   }
 
   #getSelectedColors(excludeIndex?: number): string[] {

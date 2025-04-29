@@ -58,6 +58,7 @@ export interface GameState {
   id: string;
   status: Status;
   players: Player[];
+  currentPlayer: Player;
   lastPlayedOn: Date
 }
 

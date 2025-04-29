@@ -63,7 +63,10 @@
             <span class="fw-bold">Last played on:</span>
             <span class="badge bg-info-subtle text-dark ms-2">{{ game.lastPlayedOn | date:'medium'}}</span>
           </span>
-          <a class="btn btn-link btn-sm" (click)="joinGame(game.id)">Join</a>
+          <span class="d-flex gap-2">
+            <a class="btn btn-link btn-sm" (click)="joinGame(game.id)">Join</a>
+            <a class="btn btn-link btn-sm" (click)="deleteGame(game.id)">Delete</a>
+          </span>
         </li>
 
       </ul>
