@@ -1,5 +1,5 @@
 <div class="dice-container">
-  <div [ngClass]="dice1Classes">
+  <div [ngClass]="dice1Classes()">
     <div class="dot dot-1"></div>
     <div class="dot dot-2"></div>
     <div class="dot dot-3"></div>
@@ -11,7 +11,7 @@
     <div class="dot dot-9"></div>
   </div>
 
-  <div [ngClass]="dice2Classes">
+  <div [ngClass]="dice2Classes()">
     <div class="dot dot-1"></div>
     <div class="dot dot-2"></div>
     <div class="dot dot-3"></div>
