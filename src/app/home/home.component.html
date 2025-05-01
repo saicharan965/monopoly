@@ -1,6 +1,12 @@
-<nav class="navbar bg-info">
+<nav class="navbar d-flex justify-content-between border border-bottom-5 mb-0 pb-1" [ngClass]="{'navbar-success': isDarkMode, 'navbar-light': !isDarkMode}">
   <div class="container-fluid">
     <span class="badge cursor-pointer text-dark cursor-pointer p-2 bg-light" routerLink="/">Monopoly</span>
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-secondary btn-sm" (click)="toggleTheme()">
+        <i class="bi" [class.bi-moon]="isDarkMode" [class.bi-sun]="!isDarkMode"></i>
+      </button>
+    </div>
   </div>
+
 </nav>
 <router-outlet></router-outlet>

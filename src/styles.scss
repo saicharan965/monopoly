@@ -5,6 +5,22 @@
   font-family: "Poppins", sans-serif;
 }
 
+:root {
+  --primary-color: #FF9933;
+  --secondary-color: #138808;
+  --accent-color: #000080;
+  --background-light: #ffffff;
+  --text-light: #333333;
+  --background-dark: #1a1a1a;
+  --text-dark: #ffffff;
+}
+
+
+body.dark-theme {
+  background-color: var(--background-dark);
+  color: var(--text-dark);
+}
+
 i:hover {
   -webkit-text-stroke: 1px;
   cursor: pointer;
