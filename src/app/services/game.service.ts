@@ -1,6 +1,5 @@
 import { Injectable, signal, Signal } from "@angular/core";
-import { GameState, PropertyCell, PropertyColors, PropertyTier } from "../models/game-board.models";
-import { Subject } from "rxjs";
+import { GameState, PropertyCell, PropertyColors, PropertyTier, PropertyType } from "../models/game-board.models";
 
 @Injectable({
   providedIn: "root",
@@ -15,7 +14,7 @@ export class GameService {
       price: null, rent: null,
       tier: PropertyTier.Utility,
       color: PropertyColors.LightBlue,
-      type: "Utility",
+      type: PropertyType.Start,
       details: {
         description: "Collect ₹200 every time you pass Start!",
         imageUrl: "properties/start.jpg",
@@ -28,7 +27,7 @@ export class GameService {
       price: 380, rent: 45,
       tier: PropertyTier.Luxury,
       color: PropertyColors.Red,
-      type: "Property",
+      type: PropertyType.Property,
       details: {
         description: "Capital of India — luxury at its finest.",
         imageUrl: "properties/delhi.jpg",
@@ -41,7 +40,7 @@ export class GameService {
       price: 360, rent: 40,
       tier: PropertyTier.Luxury,
       color: PropertyColors.Red,
-      type: "Property",
+      type: PropertyType.Property,
       details: {
         description: "Tech capital buzzing with innovation.",
         imageUrl: "properties/bangalore.jpg",
@@ -54,7 +53,7 @@ export class GameService {
       price: 340, rent: 38,
       tier: PropertyTier.Premium,
       color: PropertyColors.Green,
-      type: "Property",
+      type: PropertyType.Property,
       details: {
         description: "City of pearls and emerging startups.",
         imageUrl: "properties/hyderabad.jpg",
@@ -67,7 +66,7 @@ export class GameService {
       price: 320, rent: 36,
       tier: PropertyTier.Premium,
       color: PropertyColors.Green,
-      type: "Property",
+      type: PropertyType.Property,
       details: {
         description: "The cultural heart of South India.",
         imageUrl: "properties/chennai.jpg",
@@ -80,7 +79,7 @@ export class GameService {
       price: 310, rent: 34,
       tier: PropertyTier.Premium,
       color: PropertyColors.Green,
-      type: "Property",
+      type: PropertyType.Property,
       details: {
         description: "The City of Joy, full of history.",
         imageUrl: "properties/kolkata.jpg",
@@ -93,7 +92,7 @@ export class GameService {
       price: 300, rent: 32,
       tier: PropertyTier.Premium,
       color: PropertyColors.LightBlue,
-      type: "Property",
+      type: PropertyType.Property,
       details: {
         description: "Youthful energy and booming IT hub.",
         imageUrl: "properties/pune.jpg",
@@ -106,7 +105,7 @@ export class GameService {
       price: 290, rent: 30,
       tier: PropertyTier.Premium,
       color: PropertyColors.LightBlue,
-      type: "Property",
+      type: PropertyType.Property,
       details: {
         description: "Vibrant heritage blended with modernity.",
         imageUrl: "properties/ahmedabad.jpg",
@@ -119,7 +118,7 @@ export class GameService {
       price: 280, rent: 28,
       tier: PropertyTier.Basic,
       color: PropertyColors.LightBlue,
-      type: "Property",
+      type: PropertyType.Property,
       details: {
         description: "The Pink City, royal and radiant.",
         imageUrl: "properties/jaipur.jpg",
@@ -132,7 +131,7 @@ export class GameService {
       price: null, rent: null,
       tier: PropertyTier.Utility,
       color: PropertyColors.LightBlue,
-      type: "Utility",
+      type: PropertyType.Resort,
       details: {
         description: "Relaxation spot! Take a break here.",
         imageUrl: "properties/resort.jpg",
@@ -145,7 +144,7 @@ export class GameService {
       price: 260, rent: 26,
       tier: PropertyTier.Basic,
       color: PropertyColors.Yellow,
-      type: "Property",
+      type: PropertyType.Property,
       details: {
         description: "An industrial powerhouse on the rise.",
         imageUrl: "properties/kanpur.jpg",
@@ -158,7 +157,7 @@ export class GameService {
       price: 250, rent: 25,
       tier: PropertyTier.Basic,
       color: PropertyColors.Yellow,
-      type: "Property",
+      type: PropertyType.Property,
       details: {
         description: "City of Oranges and vibrant trade.",
         imageUrl: "properties/nagpur.jpg",
@@ -171,7 +170,7 @@ export class GameService {
       price: 240, rent: 24,
       tier: PropertyTier.Basic,
       color: PropertyColors.Green,
-      type: "Property",
+      type: PropertyType.Property,
       details: {
         description: "Cleanest city, bustling with markets.",
         imageUrl: "properties/indore.jpg",
@@ -184,7 +183,7 @@ export class GameService {
       price: 230, rent: 23,
       tier: PropertyTier.Basic,
       color: PropertyColors.Green,
-      type: "Property",
+      type: PropertyType.Property,
       details: {
         description: "The city of lakes and greenery.",
         imageUrl: "properties/bhopal.jpg",
@@ -197,7 +196,7 @@ export class GameService {
       price: 220, rent: 22,
       tier: PropertyTier.Basic,
       color: PropertyColors.Green,
-      type: "Property",
+      type: PropertyType.Property,
       details: {
         description: "Coastal beauty with industrial strength.",
         imageUrl: "properties/visakhapatnam.jpg",
@@ -210,7 +209,7 @@ export class GameService {
       price: 210, rent: 21,
       tier: PropertyTier.Basic,
       color: PropertyColors.LightBlue,
-      type: "Property",
+      type: PropertyType.Property,
       details: {
         description: "Diamond city and textile hub.",
         imageUrl: "properties/surat.jpg",
@@ -223,7 +222,7 @@ export class GameService {
       price: 200, rent: 20,
       tier: PropertyTier.Basic,
       color: PropertyColors.LightBlue,
-      type: "Property",
+      type: PropertyType.Property,
       details: {
         description: "Art, culture, and royal heritage.",
         imageUrl: "properties/vadodara.jpg",
@@ -236,7 +235,7 @@ export class GameService {
       price: 190, rent: 19,
       tier: PropertyTier.Basic,
       color: PropertyColors.LightBlue,
-      type: "Property",
+      type: PropertyType.Property,
       details: {
         description: "Historical charm meets modern development.",
         imageUrl: "properties/patna.jpg",
@@ -249,7 +248,7 @@ export class GameService {
       price: null, rent: null,
       tier: PropertyTier.Utility,
       color: PropertyColors.LightBlue,
-      type: "Utility",
+      type: PropertyType.PartyHouse,
       details: {
         description: "Enjoy a fun party! Relax your mind.",
         imageUrl: "properties/party-house.jpg",
@@ -262,7 +261,7 @@ export class GameService {
       price: 170, rent: 17,
       tier: PropertyTier.Basic,
       color: PropertyColors.Yellow,
-      type: "Property",
+      type: PropertyType.Property,
       details: {
         description: "India's first planned city, beautifully clean.",
         imageUrl: "properties/chandigarh.jpg",
@@ -275,7 +274,7 @@ export class GameService {
       price: 160, rent: 16,
       tier: PropertyTier.Basic,
       color: PropertyColors.Yellow,
-      type: "Property",
+      type: PropertyType.Property,
       details: {
         description: "Gateway to Northeast India’s beauty.",
         imageUrl: "properties/guwahati.jpg",
@@ -288,7 +287,7 @@ export class GameService {
       price: 150, rent: 15,
       tier: PropertyTier.Basic,
       color: PropertyColors.Green,
-      type: "Property",
+      type: PropertyType.Property,
       details: {
         description: "Emerging city full of potential.",
         imageUrl: "properties/raipur.jpg",
@@ -301,7 +300,7 @@ export class GameService {
       price: 140, rent: 14,
       tier: PropertyTier.Basic,
       color: PropertyColors.Green,
-      type: "Property",
+      type: PropertyType.Property,
       details: {
         description: "Queen of the Arabian Sea.",
         imageUrl: "properties/kochi.jpg",
@@ -314,7 +313,7 @@ export class GameService {
       price: 100, rent: 10,
       tier: PropertyTier.Basic,
       color: PropertyColors.LightBlue,
-      type: "Property",
+      type: PropertyType.Property,
       details: {
         description: "Kerala's capital, rich in tradition.",
         imageUrl: "properties/thiruvananthapuram.jpg",
@@ -327,7 +326,7 @@ export class GameService {
       price: 120, rent: 12,
       tier: PropertyTier.Basic,
       color: PropertyColors.LightBlue,
-      type: "Property",
+      type: PropertyType.Property,
       details: {
         description: "Royal heritage and majestic palaces.",
         imageUrl: "properties/mysuru.jpg",
@@ -340,7 +339,7 @@ export class GameService {
       price: 110, rent: 11,
       tier: PropertyTier.Basic,
       color: PropertyColors.LightBlue,
-      type: "Property",
+      type: PropertyType.Property,
       details: {
         description: "Temple town with ancient glory.",
         imageUrl: "properties/madurai.jpg",
@@ -353,7 +352,7 @@ export class GameService {
       price: 130, rent: 13,
       tier: PropertyTier.Basic,
       color: PropertyColors.Green,
-      type: "Property",
+      type: PropertyType.Property,
       details: {
         description: "Industrial city surrounded by nature.",
         imageUrl: "properties/coimbatore.jpg",
@@ -366,7 +365,7 @@ export class GameService {
       price: null, rent: null,
       tier: PropertyTier.Utility,
       color: PropertyColors.Red,
-      type: "Utility",
+      type: PropertyType.Jail,
       details: {
         description: "Oops! You're in jail. Miss a turn!",
         imageUrl: "properties/jail.jpg",
@@ -379,7 +378,7 @@ export class GameService {
       price: 85, rent: 8,
       tier: PropertyTier.Basic,
       color: PropertyColors.Yellow,
-      type: "Property",
+      type: PropertyType.Property,
       details: {
         description: "Spiritual heart with Golden Temple.",
         imageUrl: "properties/amritsar.jpg",
@@ -392,7 +391,7 @@ export class GameService {
       price: 80, rent: 8,
       tier: PropertyTier.Basic,
       color: PropertyColors.Yellow,
-      type: "Property",
+      type: PropertyType.Property,
       details: {
         description: "Historic city at the holy Sangam.",
         imageUrl: "properties/allahabad.jpg",
@@ -405,7 +404,7 @@ export class GameService {
       price: 75, rent: 7,
       tier: PropertyTier.Basic,
       color: PropertyColors.Green,
-      type: "Property",
+      type: PropertyType.Property,
       details: {
         description: "Home of the majestic Taj Mahal.",
         imageUrl: "properties/agra.jpg",
@@ -418,7 +417,7 @@ export class GameService {
       price: 70, rent: 7,
       tier: PropertyTier.Basic,
       color: PropertyColors.Green,
-      type: "Property",
+      type: PropertyType.Property,
       details: {
         description: "One of the world's oldest cities.",
         imageUrl: "properties/varanasi.jpg",
@@ -431,7 +430,7 @@ export class GameService {
       price: 65, rent: 6,
       tier: PropertyTier.Basic,
       color: PropertyColors.Green,
-      type: "Property",
+      type: PropertyType.Property,
       details: {
         description: "Wine capital of India.",
         imageUrl: "properties/nashik.jpg",
@@ -444,7 +443,7 @@ export class GameService {
       price: 60, rent: 6,
       tier: PropertyTier.Basic,
       color: PropertyColors.LightBlue,
-      type: "Property",
+      type: PropertyType.Property,
       details: {
         description: "Historic caves and rich culture.",
         imageUrl: "properties/aurangabad.jpg",
@@ -457,7 +456,7 @@ export class GameService {
       price: 55, rent: 5,
       tier: PropertyTier.Basic,
       color: PropertyColors.LightBlue,
-      type: "Property",
+      type: PropertyType.Property,
       details: {
         description: "The City of Lakes and royalty.",
         imageUrl: "properties/udaipur.jpg",
@@ -470,7 +469,7 @@ export class GameService {
       price: 50, rent: 5,
       tier: PropertyTier.Basic,
       color: PropertyColors.LightBlue,
-      type: "Property",
+      type: PropertyType.Property,
       details: {
         description: "Scenic beauty of the northeast hills.",
         imageUrl: "properties/shillong.jpg",

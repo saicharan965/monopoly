@@ -1,6 +1,6 @@
 export interface PropertyCell {
   id: number;
-  type: "Property" | "Utility";
+  type: PropertyType;
   name: string;
   price: number | null;
   rent: number | null;
@@ -10,6 +10,17 @@ export interface PropertyCell {
   tier: PropertyTier,
   color: PropertyColors;
   details: PropertyDetails
+}
+
+export enum PropertyType {
+  Property = 'Property',
+  Chance = 'Chance',
+  CommunityChest = 'CommunityChest',
+  Jail = 'Jail',
+  Resort = 'Resort',
+  PartyHouse = 'PartyHouse',
+  Tax = 'Tax',
+  Start = 'Start',
 }
 
 export interface PropertyDetails {
