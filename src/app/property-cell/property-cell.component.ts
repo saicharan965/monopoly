@@ -1,11 +1,12 @@
-import { Component, input, output } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { GameState, Player, PropertyCell } from '../models/game-board.models';
 import { NgClass, NgStyle } from '@angular/common';
+import { TokenModelPipe } from '../pipes/token-model.pipe';
 
 @Component({
   selector: 'app-property-cell',
   standalone: true,
-  imports: [NgClass,NgStyle],
+  imports: [NgClass, NgStyle, TokenModelPipe],
   templateUrl: './property-cell.component.html',
   styleUrl: './property-cell.component.scss'
 })

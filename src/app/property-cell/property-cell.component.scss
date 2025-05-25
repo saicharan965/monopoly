@@ -1,12 +1,14 @@
-.property-cell-name {
-  font-size: 16px;
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
 .player-marker {
-  width: 12px;
-  height: 12px;
+  width: 16px;
+  height: 16px;
+  font-size: 8px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
   border: 2px solid #fff;
+  background-color: grey;
+  font-weight: bold;
   animation: pulse 2s infinite;
 }

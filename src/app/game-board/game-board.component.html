@@ -38,7 +38,8 @@
       <div class="d-flex justify-content-center gap-2">
         <button class="btn btn-success" [disabled]="gameState()?.isCurrentPlayerAlreadyRolledTheDice"
           (click)="rollDice()">Roll dice</button>
-        <button class="btn btn-danger" [disabled]="!gameState()?.isCurrentPlayerAlreadyRolledTheDice" (click)="endTurn()">End Turn</button>
+        <button class="btn btn-danger" [disabled]="!gameState()?.isCurrentPlayerAlreadyRolledTheDice"
+          (click)="endTurn()">End Turn</button>
         @if (showTimer()) {
         <button class="btn btn-danger"> {{timer()}}</button>
         }

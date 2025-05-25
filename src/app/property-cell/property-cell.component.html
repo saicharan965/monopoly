@@ -2,8 +2,8 @@
   @if (playersOnThisCell.length > 0) {
   <div class="d-flex m-1">
     @for (player of playersOnThisCell; track player.id) {
-    <div class="player-marker rounded-circle" [ngStyle]="{'background-color': player.tokenColor.toLowerCase()}"
-      title="{{player.name}}"></div>
+    <div class="player-marker rounded-circle" [ngStyle]="{'background-color': player.tokenColor.toLowerCase()}">
+      {{player.name | tokenModel}}</div>
     }
   </div>
   }
