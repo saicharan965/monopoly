@@ -33,25 +33,33 @@ export class GameLobbyComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    this.addPlayer()
-    this.getPreviousGames()
+    this.addPlayer();
+    this.getPreviousGames();
+
+    this.lobbyFormGroup.controls['maxPlayers'].valueChanges.subscribe((newMax: number | null) => {
+      if (newMax !== null) {
+        while (this.players.length > newMax) {
+          this.players.removeAt(this.players.length - 1);
+        }
+      }
+    });
   }
 
+
   getPreviousGames() {
-    const gamesKeys = Object.keys(localStorage)
-    const previousGamesKeys = gamesKeys ? gamesKeys.filter(x => x.includes('game-')) : []
+    const gamesKeys = Object.keys(localStorage);
+    const previousGamesKeys = gamesKeys.filter(x => x.includes('game-'));
+    const parsedGames: GameState[] = [];
+
     previousGamesKeys.forEach((gameKey) => {
-      const gameState = localStorage.getItem(gameKey)
+      const gameState = localStorage.getItem(gameKey);
       if (gameState != null) {
         const parsedGameState = JSON.parse(gameState) as GameState;
-        this.previousGames.push(parsedGameState);
+        parsedGames.push(parsedGameState);
       }
-    })
-    const previousGames: GameState[] = []
-    if (previousGames.length > 0) {
-      this.hasPreviousGames = true;
-      this.previousGames = previousGames;
-    }
+    });
+    this.previousGames = parsedGames;
+    this.hasPreviousGames = parsedGames.length > 0;
   }
 
   get players() {
@@ -109,10 +117,13 @@ export class GameLobbyComponent implements OnInit {
   }
 
   protected deleteGame(gameId: string) {
-    localStorage.removeItem(`game-${gameId}`);
-    this.previousGames = this.previousGames.filter(game => game.id !== gameId);
-    this.#toastrService.success('Game deleted successfully');
+    if (confirm('Are you sure you want to delete this game?')) {
+      localStorage.removeItem(`game-${gameId}`);
+      this.previousGames = this.previousGames.filter(game => game.id !== gameId);
+      this.#toastrService.success('Game deleted successfully');
+    }
   }
+
 
   #getSelectedColors(excludeIndex?: number): string[] {
     return this.players.controls

@@ -1,12 +1,12 @@
 <div class="parent">
   @for (property of properties(); track $index) {
-  <div (click)="onDetails(property.id)" class="card shadow hover div{{property.id}}"
-    [ngClass]="property.type === 'Property' ? 'proprty-card':'utillity-card'" [ngClass]="{
-      'bg-danger' : property.color === PropertyColors.Red,
-      'bg-success' : property.color === PropertyColors.Green,
-      'bg-info' : property.color === PropertyColors.LightBlue,
-      'bg-warning' : property.color === PropertyColors.Yellow,
-    }">
+  <div (click)="onDetails(property.id)" class="card shadow hover div{{property.id}}" [ngClass]="[
+  property.type === 'Property' ? 'proprty-card' : 'utillity-card',
+  property.color === PropertyColors.Red ? 'bg-danger' : '',
+  property.color === PropertyColors.Green ? 'bg-success' : '',
+  property.color === PropertyColors.LightBlue ? 'bg-info' : '',
+  property.color === PropertyColors.Yellow ? 'bg-warning' : ''
+]">
     <app-property-cell [gameState]="gameState()" [property]="property"></app-property-cell>
   </div>
   }
@@ -47,7 +47,7 @@
     </div>
     <div class="container-fluid gap-2 d-flex justify-content-evenly mt-2">
       @for (player of gameState()?.players; track $index) {
-      <div class="card w-50">
+      <div class="card w-50" [ngClass]="{ 'shadow ': gameState()?.currentPlayer?.id === player.id }">
         <p class="card-title text-center bg-primary-subtle mb-0">{{player.name}}</p>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
