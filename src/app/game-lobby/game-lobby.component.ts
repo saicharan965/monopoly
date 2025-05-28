@@ -99,7 +99,7 @@ export class GameLobbyComponent implements OnInit {
           id: player.id,
           name: player.name,
           tokenColor: player.tokenColor,
-          position: 0,
+          position: 1,
           properties: null,
           money: 1500,
         })) as Player[]

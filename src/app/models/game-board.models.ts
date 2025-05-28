@@ -4,7 +4,9 @@ export interface PropertyCell {
   name: string;
   price: number | null;
   rent: number | null;
-  ownerId?: number;
+  ownerId?: string;
+  isOwned: boolean;
+  isMortgaged: boolean;
   ownerName?: string
   mortgageValue?: number;
   tier: PropertyTier,

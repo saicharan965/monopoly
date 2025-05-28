@@ -2,6 +2,7 @@ import { Component, HostListener, inject, input, OnInit, signal } from '@angular
 import { PropertyCell } from '../models/game-board.models';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GameService } from '../services/game.service';
+import { PropertiesService } from '../services/properties.service';
 
 @Component({
   selector: 'app-property-cell-details',
@@ -15,6 +16,8 @@ export class PropertyCellDetailsComponent implements OnInit {
   #router = inject(Router);
   #route = inject(ActivatedRoute);
   #gameService = inject(GameService);
+  #propertyService = inject(PropertiesService);
+
 
   @HostListener('document:keydown.escape', ['$event'])
   protected onEscape(event: KeyboardEvent) {
@@ -29,7 +32,7 @@ export class PropertyCellDetailsComponent implements OnInit {
   public ngOnInit(): void {
     this.#route.params.subscribe(params => {
       const propertyId = Number(params['id']);
-      this.property.set(this.#gameService.getPropertyById(propertyId));
+      this.property.set(this.#propertyService.getPropertyById(propertyId));
     })
   }
 }

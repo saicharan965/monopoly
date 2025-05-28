@@ -10,41 +10,24 @@
     <app-property-cell [gameState]="gameState()" [property]="property"></app-property-cell>
   </div>
   }
-  <div class="community-chest div37 d-flex flex-row">
+  <div class="community-chest div37">
     <span class="community-chest-title-container bg-primary-subtle">
       <span class="fw-bold text-dark me-3">
         Chance
       </span>
       <i class="bi bi-question-lg ms-0 text-dark"></i>
     </span>
+    <div class="container-fluid gap-2 d-flex justify-content-evenly mt-2">
+      <p>Player Actions here</p>
+    </div>
   </div>
   <div class="community-chest div38">
     <span class="community-chest-title-container bg-primary-subtle">
       <span class="fw-bold text-dark me-3">
-        Community chest
+        Player Details here
       </span>
       <i class="bi bi-box2 ms-0 text-dark"></i>
     </span>
-  </div>
-  <div class="community-chest div39">
-    <div class="community-chest-title-container bg-primary-subtle">
-      <span class="fw-bold text-dark me-3">
-        Game Details
-      </span>
-      <i class="bi bi-card-checklist ms-0 text-dark"></i>
-    </div>
-    <div class="mt-4">
-      <app-dice [isRolling]="isRolling" [diceValues]="diceValues"></app-dice>
-      <div class="d-flex justify-content-center gap-2">
-        <button class="btn btn-success" [disabled]="gameState()?.isCurrentPlayerAlreadyRolledTheDice"
-          (click)="rollDice()">Roll dice</button>
-        <button class="btn btn-danger" [disabled]="!gameState()?.isCurrentPlayerAlreadyRolledTheDice"
-          (click)="endTurn()">End Turn</button>
-        @if (showTimer()) {
-        <button class="btn btn-danger"> {{timer()}}</button>
-        }
-      </div>
-    </div>
     <div class="container-fluid gap-2 d-flex justify-content-evenly mt-2">
       @for (player of gameState()?.players; track $index) {
       <div class="card w-50" [ngClass]="{ 'shadow ': gameState()?.currentPlayer?.id === player.id }">
@@ -69,6 +52,27 @@
       </div>
       }
     </div>
+  </div>
+  <div class="community-chest div39">
+    <div class="community-chest-title-container bg-primary-subtle">
+      <span class="fw-bold text-dark me-3">
+        Game Details
+      </span>
+      <i class="bi bi-card-checklist ms-0 text-dark"></i>
+    </div>
+    <div class="mt-4">
+      <app-dice [isRolling]="isRolling" [diceValues]="diceValues"></app-dice>
+      <div class="d-flex justify-content-center gap-2">
+        <button class="btn btn-success" [disabled]="gameState()?.isCurrentPlayerAlreadyRolledTheDice"
+          (click)="rollDice()">Roll dice</button>
+        <button class="btn btn-danger" [disabled]="!gameState()?.isCurrentPlayerAlreadyRolledTheDice"
+          (click)="endTurn()">End Turn</button>
+        @if (showTimer()) {
+        <button class="btn btn-danger"> {{timer()}}</button>
+        }
+      </div>
+    </div>
+
   </div>
   <div class="div40 rounded-2 bg-primary-subtle d-flex justify-content-center align-items-center fs-2">
     <span class="fw-bold text-dark me-3">
