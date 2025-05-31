@@ -6,11 +6,12 @@ import { CommonModule } from '@angular/common';
 import { PropertyCellComponent } from '../property-cell/property-cell.component';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { DiceComponent } from '../dice/dice.component';
+import { PlayerActionsComponent } from '../player-actions/player-actions.component';
 
 @Component({
   selector: 'app-game-board',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, PropertyCellComponent, DiceComponent],
+  imports: [CommonModule, RouterOutlet, PropertyCellComponent, DiceComponent, PlayerActionsComponent],
   templateUrl: './game-board.component.html',
   styleUrl: './game-board.component.scss'
 })
@@ -70,7 +71,16 @@ export class GameBoardComponent implements OnInit, OnDestroy {
         if (!prevState || !prevState.id) {
           throw new Error('GameState or GameState.id is undefined');
         }
-        return { ...prevState, lastPlayedOn: new Date(), id: prevState.id, isCurrentPlayerAlreadyRolledTheDice: true };
+        return {
+          ...prevState,
+          lastPlayedOn: new Date(),
+          id: prevState.id,
+          isCurrentPlayerAlreadyRolledTheDice: true,
+          currentPlayer: prevState.players.find(player => player.id === prevState.currentPlayer.id) || prevState.currentPlayer,
+          status: Status.RolledDice,
+          rolledDiceValues: this.diceValues,
+          rolledOn: new Date(),
+        };
       });
       this.#startCountDown(25)
       this.#updateStateAndSaveToLocalStorage();
