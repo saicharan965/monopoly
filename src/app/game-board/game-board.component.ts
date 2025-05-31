@@ -6,7 +6,6 @@ import { CommonModule } from '@angular/common';
 import { PropertyCellComponent } from '../property-cell/property-cell.component';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { DiceComponent } from '../dice/dice.component';
-import { PropertiesService } from '../services/properties.service';
 
 @Component({
   selector: 'app-game-board',
@@ -23,7 +22,6 @@ export class GameBoardComponent implements OnInit, OnDestroy {
   protected showTimer = signal(false);
   protected timer = signal(0);
   #gameService = inject(GameService);
-  #propertyService = inject(PropertiesService);
   #router = inject(Router);
   #route = inject(ActivatedRoute);
   protected properties = signal<PropertyCell[]>([]);
@@ -32,7 +30,7 @@ export class GameBoardComponent implements OnInit, OnDestroy {
     const gameId = this.#route.snapshot.params['id'];
     const localGameKey = `game-${gameId}`;
     const previousGame = localStorage.getItem(localGameKey);
-    this.properties.set(this.#propertyService.getProperties()());
+    this.properties.set(this.#gameService.getProperties()());
     if (previousGame != null) {
       //restore the previous game and maybe ask a confirmation that you want to continue ?
       this.gameState.set(JSON.parse(previousGame));
