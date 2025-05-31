@@ -5,12 +5,12 @@
   <div class="card-body">
     <p class="card-text">Current Player: {{ gameState()?.currentPlayer?.name }}</p>
     <p class="card-text">Current Player properties:
-      @if (gameState()?.currentPlayer?.properties?.length! > 0) {
-        @for (item of gameState()?.currentPlayer?.properties; track $index) {
-          <span class="badge bg-success p-1 h3 text-dark">{{ item.property.name }}</span>
-        }
+      @if (currentPlayerProperties!.length > 0) {
+      @for (item of gameState()?.currentPlayer?.properties; track $index) {
+      <span class="badge bg-success p-1 h3 text-dark">{{ item.property.name }}</span>
+      }
       } @else {
-        <span class="badge bg-danger p-1 h3 text-dark">No properties owned</span>
+      <span class="badge bg-danger p-1 h3 text-dark">No properties owned</span>
       }
     </p>
     <p class="card-text">Current Player money: ₹{{ gameState()?.currentPlayer?.money }}</p>
@@ -18,14 +18,14 @@
 
     <div class="d-flex justify-content-around mt-3">
       @if (canBuy()) {
-        <button class="btn btn-success animate__animated animate__pulse" (click)="buyProperty()">
-          Buy Property
-        </button>
+      <button class="btn btn-success animate__animated animate__pulse" (click)="buyProperty()">
+        Buy Property
+      </button>
       }
       @if (canMortgage()) {
-        <button class="btn btn-warning animate__animated animate__pulse" (click)="mortgageProperty()">
-          Mortgage Property
-        </button>
+      <button class="btn btn-warning animate__animated animate__pulse" (click)="mortgageProperty()">
+        Mortgage Property
+      </button>
       }
     </div>
   </div>

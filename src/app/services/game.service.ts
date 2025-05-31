@@ -603,7 +603,16 @@ export class GameService {
 
     const updatedPlayer = {
       ...player,
-      money: player.money - property.price!
+      money: player.money - property.price!,
+      properties: [
+        ...(player.properties || []),
+        {
+          property: this.getPropertyById(propertyId),
+          houseCount: 0,
+          hotelCount: 0,
+          rentCollected: 0
+        }
+      ]
     };
 
     const updatedPlayers = [...state.players];
@@ -613,7 +622,6 @@ export class GameService {
       ...state,
       players: updatedPlayers
     });
-
     localStorage.setItem(`game-${state.id}`, JSON.stringify(this.gameState()));
   }
 

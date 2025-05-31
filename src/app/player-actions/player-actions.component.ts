@@ -1,17 +1,24 @@
-import { Component, effect, inject, input, signal } from '@angular/core';
-import { GameState, PropertyCell } from '../models/game-board.models';
+import { Component, inject, input } from '@angular/core';
+import { GameState, Player, PropertyCell } from '../models/game-board.models';
 import { GameService } from '../services/game.service';
 
 @Component({
   selector: 'app-player-actions',
   standalone: true,
-  imports: [],
   templateUrl: './player-actions.component.html',
   styleUrl: './player-actions.component.scss'
 })
 export class PlayerActionsComponent {
   public gameState = input.required<GameState | undefined>();
   public currentProperty = input.required<PropertyCell | undefined>();
+  protected get currentPlayer(): Player | undefined {
+    return this.gameState()?.currentPlayer;
+  }
+
+  protected get currentPlayerProperties(): Player['properties'] {
+    const playerId = this.currentPlayer?.id;
+    return this.gameState()?.players.find(p => p.id === playerId)?.properties ?? [];
+  }
   #gameService = inject(GameService);
 
   protected canBuy(): boolean {

@@ -103,7 +103,7 @@ export class GameBoardComponent implements OnInit, OnDestroy {
 
   protected endTurn() {
     this.showTimer.set(false);
-    this.gameState.update((prevState) => {
+    this.#gameService.gameState.update((prevState) => {
       if (!prevState || !prevState.id) {
         throw new Error('GameState or GameState.id is undefined');
       }
