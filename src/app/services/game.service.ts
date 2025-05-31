@@ -572,16 +572,65 @@ export class GameService {
     return this.#properties.find(property => property.id === id) as PropertyCell;
   }
 
-  protected buyProperty(propertyId: number, playerId: string): void {
+  public buyProperty(propertyId: number, playerId: string): void {
+    const state = this.gameState();
+    if (!state) return;
+
     const property = this.getPropertyById(propertyId);
+    const playerIndex = state.players.findIndex(p => p.id === playerId);
+
     if (!property) {
       throw new Error(`Property with id ${propertyId} not found`);
     }
+
     if (property.isOwned) {
       throw new Error(`Property with id ${propertyId} is already owned`);
     }
+
+    if (playerIndex === -1) {
+      throw new Error(`Player with id ${playerId} not found`);
+    }
+
+    const player = state.players[playerIndex];
+
+    if (player.money < property.price!) {
+      throw new Error(`Player ${player.name} doesn't have enough money`);
+    }
+
     property.isOwned = true;
     property.ownerId = playerId;
-    property.ownerName = this.getPlayerNameById(playerId);
+    property.ownerName = player.name;
+
+    const updatedPlayer = {
+      ...player,
+      money: player.money - property.price!
+    };
+
+    const updatedPlayers = [...state.players];
+    updatedPlayers[playerIndex] = updatedPlayer;
+
+    this.gameState.set({
+      ...state,
+      players: updatedPlayers
+    });
+
+    localStorage.setItem(`game-${state.id}`, JSON.stringify(this.gameState()));
+  }
+
+
+  public mortgageProperty(propertyId: number): void {
+    const property = this.getPropertyById(propertyId);
+    if (!property || !property.isOwned || property.isMortgaged) return;
+
+    property.isMortgaged = true;
+
+    const gameState = this.gameState();
+    const owner = gameState?.players.find(p => p.id === property.ownerId);
+    if (owner) {
+      owner.money += property.price! / 2;
+    }
+
+    this.gameState.update(() => ({ ...gameState! }));
+    localStorage.setItem(`game-${gameState?.id}`, JSON.stringify(gameState));
   }
 }

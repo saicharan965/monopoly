@@ -7,6 +7,8 @@
   property.color === PropertyColors.LightBlue ? 'bg-info' : '',
   property.color === PropertyColors.Yellow ? 'bg-warning' : ''
 ]">
+    <div *ngIf="property.ownerId" class="ownership-marker"
+      [ngStyle]="{ 'background-color': getPlayerColor(property.ownerId) }"></div>
     <app-property-cell [gameState]="gameState()" [property]="property"></app-property-cell>
   </div>
   }
@@ -18,7 +20,7 @@
       <i class="bi bi-question-lg ms-0 text-dark"></i>
     </span>
     <div class="container-fluid gap-2 mt-2">
-      <app-player-actions [gameState]="gameState()"></app-player-actions>
+      <app-player-actions [currentProperty]="selectedProperty()" [gameState]="gameState()"></app-player-actions>
     </div>
   </div>
   <div class="community-chest div38">
