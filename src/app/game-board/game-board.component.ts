@@ -58,13 +58,33 @@ export class GameBoardComponent implements OnInit, OnDestroy {
 
     // First set the properties
     const properties = this.#gameService.getProperties()();
-    this.properties.set(properties);
 
     if (previousGame != null) {
       const parsedGame = JSON.parse(previousGame);
+
+      // Restore property ownership from saved game state
+      if (parsedGame.players) {
+        parsedGame.players.forEach((player: any) => {
+          if (player.properties) {
+            player.properties.forEach((prop: any) => {
+              const property = properties.find(p => p.id === prop.property.id);
+              if (property) {
+                property.isOwned = true;
+                property.ownerId = player.id;
+                property.isMortgaged = prop.isMortgaged || false;
+              }
+            });
+          }
+        });
+      }
+
+      this.properties.set(properties);
+
       // Update both component and service state
       this.updateGameStateFromService(parsedGame);
       this.#gameService.gameState.set(parsedGame);
+    } else {
+      this.properties.set(properties);
     }
   }
 
