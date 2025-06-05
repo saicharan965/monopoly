@@ -1,12 +1,13 @@
-import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, signal, effect } from '@angular/core';
 import { Subject } from 'rxjs';
 import { PropertyColors, PropertyCell, GameState, Status } from '../models/game-board.models';
-import { GameService } from '../services/game.service';
 import { CommonModule } from '@angular/common';
+import { RouterOutlet } from '@angular/router';
 import { PropertyCellComponent } from '../property-cell/property-cell.component';
-import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { DiceComponent } from '../dice/dice.component';
 import { PlayerActionsComponent } from '../player-actions/player-actions.component';
+import { Router, ActivatedRoute } from '@angular/router';
+import { GameService } from '../services/game.service';
 
 @Component({
   selector: 'app-game-board',
@@ -28,16 +29,42 @@ export class GameBoardComponent implements OnInit, OnDestroy {
   #route = inject(ActivatedRoute);
   protected properties = signal<PropertyCell[]>([]);
   #unsubscribe$: Subject<void> = new Subject<void>();
+  private currentTimerId?: number;
+  private currentIntervalId?: number;
+
+  constructor() {
+    // Set up effect with allowSignalWrites option
+    effect(() => {
+      const serviceState = this.#gameService.gameState();
+      if (serviceState) {
+        this.updateGameStateFromService(serviceState);
+      }
+    }, { allowSignalWrites: true });
+  }
+
+  private updateGameStateFromService(serviceState: GameState) {
+    this.gameState.set(serviceState);
+    const currentPlayer = serviceState.currentPlayer;
+    if (currentPlayer) {
+      const currentProperty = this.#gameService.getPropertyById(currentPlayer.position);
+      this.selectedProperty.set(currentProperty);
+    }
+  }
 
   public ngOnInit() {
     const gameId = this.#route.snapshot.params['id'];
     const localGameKey = `game-${gameId}`;
     const previousGame = localStorage.getItem(localGameKey);
-    this.properties.set(this.#gameService.getProperties()());
+
+    // First set the properties
+    const properties = this.#gameService.getProperties()();
+    this.properties.set(properties);
+
     if (previousGame != null) {
-      //restore the previous game and maybe ask a confirmation that you want to continue ?
-      this.gameState.set(JSON.parse(previousGame));
-      this.#gameService.gameState.update(() => JSON.parse(previousGame));
+      const parsedGame = JSON.parse(previousGame);
+      // Update both component and service state
+      this.updateGameStateFromService(parsedGame);
+      this.#gameService.gameState.set(parsedGame);
     }
   }
 
@@ -54,15 +81,30 @@ export class GameBoardComponent implements OnInit, OnDestroy {
     this.#router.navigate(['property', propertyId], { relativeTo: this.#route });
   }
 
+  private updateGameState(stateUpdater: (prevState: GameState) => GameState) {
+    const prevState = this.gameState();
+    if (!prevState || !prevState.id) {
+      throw new Error('GameState or GameState.id is undefined');
+    }
+
+    const newState = stateUpdater(prevState);
+
+    // Update both component and service state
+    this.gameState.set(newState);
+    this.#gameService.gameState.set(newState);
+
+    // Update localStorage
+    localStorage.setItem(`game-${newState.id}`, JSON.stringify(newState));
+  }
 
   protected rollDice() {
     this.isRolling = true;
-    this.gameState.update((prevState) => {
-      if (!prevState || !prevState.id) {
-        throw new Error('GameState or GameState.id is undefined');
-      }
-      return { ...prevState, status: Status.RollingDice, lastPlayedOn: new Date(), id: prevState.id };
-    });
+    this.updateGameState((prevState) => ({
+      ...prevState,
+      status: Status.RollingDice,
+      lastPlayedOn: new Date(),
+    }));
+
     let rollInterval = setInterval(() => {
       this.diceValues = [
         Math.floor(Math.random() * 6) + 1,
@@ -78,36 +120,60 @@ export class GameBoardComponent implements OnInit, OnDestroy {
       ];
       this.isRolling = false;
       this.showTimer.set(true);
-      this.gameState.update((prevState) => {
-        if (!prevState || !prevState.id) {
-          throw new Error('GameState or GameState.id is undefined');
-        }
-        return {
-          ...prevState,
-          lastPlayedOn: new Date(),
-          id: prevState.id,
-          isCurrentPlayerAlreadyRolledTheDice: true,
-          currentPlayer: prevState.players.find(player => player.id === prevState.currentPlayer.id) || prevState.currentPlayer,
-          status: Status.RolledDice,
-          rolledDiceValues: this.diceValues,
-          rolledOn: new Date(),
-        };
-      });
-      this.#startCountDown(25)
-      this.#updateStateAndSaveToLocalStorage();
 
+      this.updateGameState((prevState) => ({
+        ...prevState,
+        lastPlayedOn: new Date(),
+        isCurrentPlayerAlreadyRolledTheDice: true,
+        currentPlayer: prevState.players.find(player => player.id === prevState.currentPlayer.id) || prevState.currentPlayer,
+        status: Status.RolledDice,
+        rolledDiceValues: this.diceValues,
+        rolledOn: new Date(),
+      }));
+
+      this.#startCountDown(25);
+      this.#updateStateAndSaveToLocalStorage();
     }, 2000);
   }
 
+  #startCountDown(secs?: number) {
+    // Clear any existing timer
+    this.#clearCurrentTimer();
 
+    this.timer.set(secs ? secs : 10);
+
+    // Store the interval ID
+    this.currentIntervalId = window.setInterval(() => {
+      this.timer.update((prev) => {
+        // Don't go below 0
+        return Math.max(0, prev - 1);
+      });
+    }, 1000);
+
+    this.currentTimerId = window.setTimeout(() => {
+      this.#clearCurrentTimer();
+      this.showTimer.set(false);
+      this.endTurn();
+      this.timer.set(0);
+    }, secs ? secs * 1000 : 10000);
+  }
+
+  #clearCurrentTimer() {
+    if (this.currentTimerId) {
+      clearTimeout(this.currentTimerId);
+      this.currentTimerId = undefined;
+    }
+    if (this.currentIntervalId) {
+      clearInterval(this.currentIntervalId);
+      this.currentIntervalId = undefined;
+    }
+  }
 
   protected endTurn() {
+    // Clear the timer when manually ending turn
+    this.#clearCurrentTimer();
     this.showTimer.set(false);
-    this.#gameService.gameState.update((prevState) => {
-      if (!prevState || !prevState.id) {
-        throw new Error('GameState or GameState.id is undefined');
-      }
-
+    this.updateGameState((prevState) => {
       const currentIndex = prevState.players.findIndex(p => p.id === prevState.currentPlayer.id);
       const nextPlayer = prevState.players[(currentIndex + 1) % prevState.players.length];
 
@@ -115,34 +181,14 @@ export class GameBoardComponent implements OnInit, OnDestroy {
         ...prevState,
         status: Status.EndTurn,
         lastPlayedOn: new Date(),
-        id: prevState.id,
         isCurrentPlayerAlreadyRolledTheDice: false,
         currentPlayer: nextPlayer
       };
     });
-
-    localStorage.setItem(`game-${this.gameState()?.id}`, JSON.stringify(this.gameState()));
-  }
-
-  #startCountDown(secs?: number) {
-    this.timer.set(secs ? secs : 10);
-    const interval = setInterval(() => {
-      this.timer.update((prev) => prev - 1);
-    }, 1000);
-
-    setTimeout(() => {
-      clearInterval(interval);
-      this.showTimer.set(false);
-      this.endTurn()
-      this.timer.set(0);
-    }, secs ? secs * 1000 : 10000);
   }
 
   #updateStateAndSaveToLocalStorage() {
-    this.gameState.update((prevState) => {
-      if (!prevState || !prevState.id) {
-        throw new Error('GameState or GameState.id is undefined');
-      }
+    this.updateGameState((prevState) => {
       const updatedPlayers = prevState.players.map(player => {
         if (player.id === prevState.currentPlayer.id) {
           return {
@@ -152,24 +198,25 @@ export class GameBoardComponent implements OnInit, OnDestroy {
         }
         return player;
       });
+
       const newGameState: GameState = {
         ...prevState,
         players: updatedPlayers,
         status: Status.RolledDice,
         lastPlayedOn: new Date(),
-        id: prevState.id
       };
+
       const newCurrentPlayer = newGameState.players.find(p => p.id === newGameState.currentPlayer.id);
       const newProperty = this.#gameService.getPropertyById(newCurrentPlayer?.position ?? 0);
       this.selectedProperty.set(newProperty);
+
       return newGameState;
     });
-    localStorage.setItem(`game-${this.gameState()?.id}`, JSON.stringify(this.gameState()));
   }
 
-
   public ngOnDestroy() {
-    this.#unsubscribe$.next()
-    this.#unsubscribe$.complete()
+    this.#clearCurrentTimer();
+    this.#unsubscribe$.next();
+    this.#unsubscribe$.complete();
   }
 }
